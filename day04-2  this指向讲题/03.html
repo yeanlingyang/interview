@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    var number = 2;  //4
+    var obj = {
+      number: 4,  //8
+      fn1: (function () {
+        var number;
+        //函数自调用中的this指向window
+        this.number *= 2;   //this 指向 window  全局的 4
+        number = number * 2  //undefined
+        number = 3;  //9
+        return function () {
+          var num = this.number;  // 4
+          this.number *= 2;// obj的number  8
+          console.log(num);// 4  4 
+          number *= 3;    //9 
+          alert(number);//9  27
+        }
+      })(),
+    }
+
+    var fn1 = obj.fn1;//指向同一个地址
+
+    alert(number);  //4
+
+    fn1();//4
+    obj.fn1(); 
+    console.log(window.number);// 8
+    console.log(obj.number);//8
+   
+
+  
+  </script>
+</body>
+
+</html>

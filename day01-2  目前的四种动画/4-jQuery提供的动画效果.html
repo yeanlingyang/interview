@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 400px;
+      height: 100px;
+      margin: 200px auto;
+      background-color: pink;
+      border: 3px solid #000;
+      position: relative;
+    }
+    .son {
+      width: 100px;
+      height: 400px;
+      background-color: blue;
+      position: absolute;
+      top: 100px;
+      left: 150px;
+      display: none;
+    }
+  
+  
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="son"></div>
+  </div>
+
+  <script src="./lib/jQuery/jquery-1.8.3.min.js"></script>
+  <script>
+    $('.container').mouseenter(function() {
+      $('.son').stop().slideDown(500);
+    })
+    
+    $('.container').mouseleave(function() {
+      $('.son').stop().slideUp(500);
+    })
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // split: 可以将字符串拆分成数组, 会返回一个拆分得到的数组
+    // push：在数组的最后面, 添加一个或多个项, 返回数组的长度
+    // reverse: 翻转数组
+    // splice 方法, 可以在数组的任意位置 添加  删除  替换 任意项!!!
+
+    var arr1 = "john".split('');
+
+    var arr2 = arr1.reverse();
+
+    var arr3 = "jones".split('');
+
+    arr2.push(arr3);
+
+    console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1));
+    console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1));
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //仍然是预解析(在与解析过程中还要考虑一下当前变量的作用域)
+     function m () {
+        console.log(a1); 
+        console.log(a2); 
+        console.log(b1); 
+        console.log(b2); 
+        if(false) {
+            function b1 (){};
+            var a1 = 10;
+        }
+        if(true) {
+            function b2 (){};
+            var a2 = 10;
+        }
+        console.log(a1); 
+        console.log(a2); 
+        console.log(b1); 
+        console.log(b2); 
+    }
+    m();
+
+    //解析过程
+    function m () {
+
+        console.log(a1); 
+        console.log(a2); 
+        console.log(b1); 
+        console.log(b2); 
+        if(false) {
+            function b1 (){};
+            var a1
+            // var a1 = 10;
+        }
+        if(true) {
+            function b2 (){};
+            var a2
+            a2 = 10;
+        }
+
+        console.log(a1); 
+        console.log(a2); 
+        console.log(b1); 
+        console.log(b2); 
+    }
+    m();
+    //---------------------------------------
+
+
+    // function n() {
+    //     if(2>1) {
+    //         arr = 10;
+    //         brr = 10;
+    //         let arr;
+    //         var brr;
+    //         console.log(arr);
+    //         console.log(brr);
+    //     }
+    // }
+    // n();  
+
+
+    //解析过程 
+    // function n() {
+    //   if (2 > 1) {
+    //     arr = 10;
+    //     brr = 10;
+    //     let arr;
+    //     var brr;
+    //     console.log(arr);
+    //     console.log(brr);
+    //   }
+    // }
+    // n();  
+  </script>
+</body>
+
+</html>

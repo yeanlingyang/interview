@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var a = {};
+    b = { key: 'b' };
+    c = { key: 'c' };
+
+    a[b] = 123;
+    a[c] = 456;
+
+    console.log(a[b]);
+    console.log(a[c]);
+
+  // 解析：我们知道，Javascript 中对象的 key 值，一定会是一个 string 值，
+  // 如果不是，则会隐式地进行转换。当执行到 a[b]=123] 时，b 并不是一个 string 值，
+  // 将 b 执行 toString() 方法转换（得到 "[object Object]"），
+  // a[c] 也是相同道理。所以代码其实可以看做这样执行：
+
+  // 原因为：当设置对象属性时，Java会暗中字符串化参数值。
+  // 在这种情况下，由于 b 和 c都是对象，因此它们都将被转换为"[object Object]"。
+  // 结果就是， a[b]和a[c]均相当于a["[object Object]"] ，并可以互换使用。
+  // 因此，设置或引用 a[c]和设置或引用 a[b]完全相同
+
+  </script>
+</body>
+
+</html>

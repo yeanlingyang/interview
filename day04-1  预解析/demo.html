@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 当if条件不满足时，JS引擎还是为我们申明了变量a。
+    // 这里是引擎的预处理查找到关键字var将申明提升到了作用域顶部。
+    // 由于if条件不满足导致赋值部分没有执行。
+    // function fn(){
+
+    // function fn(){
+    //   if(false){
+    //     var a = 1;
+    //     function fn2(){}
+    //   }
+    //   if(true){
+    //     var b = 2;
+    //   }
+    //   console.log(a);
+    //   console.log(b);
+    //   console.log(fn2);
+    // }
+    // fn()
+
+
+
+   function fn(){
+    console.log(fn1);
+    if (true) {
+      
+      var num = 12;
+      function fn1(){};
+    }
+    console.log(num);
+   }
+   fn()
+  </script>
+</body>
+
+</html>

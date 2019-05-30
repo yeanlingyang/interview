@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 知识点：原型链
+
+
+    function person(name) {
+      this.name = name;
+    }
+    person.prototype.showName = function () {
+      return this.name;
+    }
+    function man(name, age) {
+      person.call(this, name);
+      this.age = age; 
+    }
+    man.prototype = new person();
+    man.prototype.showAge = function () {
+      return this.age;
+    }
+    var Man = new man('boy', 12);
+
+    console.log(Man.showName());
+    console.log(Man.showAge());
+
+  </script>
+</body>
+
+</html>

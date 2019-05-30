@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+
+  <script>
+
+    // 冒泡排序
+    // 冒泡排序思想：每一次对比相邻两个数据的大小，小的排在前面，如果前面的数据比后面的大就交换这两个数的位置
+    // 要实现上述规则需要用到两层for循环，和假设成立法
+
+
+
+    // arr.splice ():可以在数组的任意位置，添加 ，删除 ， 替换 任意项，涉及到增删操作，所以会改变原数组，返回的是新的数组
+    //          splice（begin，deletecounts，item1，item2 。。。。）
+    //          第一个参数是从哪开始删的下标，删几个，添加的项1，添加的项2.。。。
+
+    // arr.concat(arr1,arr2,arr3...)  可以合并几个数组，返回的是一个新的数组
+
+
+    // 快速排序思想：先找到一个基准点（一般指数组的中部，可以选取第一个，或者最后一个数为基准），
+    // 然后数组被该基准点分为两部分，依次与该基准点数据比较，如果比它小，放左边；反之，放右边。
+    // 左右分别用一个空数组去存储比较之后的数据。最后递归执行上述操作，直到数组长度<=1;
+
+    // 快速排序
+    // 特点：快速，常用。缺点是需要另外声明两个数组，浪费了内存空间资源。
+    
+   
+
+
+    // 思路：取出中间数，数组每次和中间数比较，小的放到左边，大的放到右边。
+  var arr = [3,1,6,4,2,5,7];
+  function quickSort(arr) {
+    //如果数组<=1,则直接返回
+    if(arr.length<=1){
+      return arr;
+      }
+
+    //找基准，并把基准从原数组删除，找到中间值
+    var pivotIndex = Math.floor(arr.length / 2);   //基准点的下标
+    // console.log(pivotIndex);
+    var pivot=arr.splice(pivotIndex,1)[0];
+    // console.log(pivot);
+
+
+    //定义左右数组
+    var left = [];
+    var right = [];
+
+	  //遍历数组，进行判断分配，比基准小的放在left，比基准大的放在right
+    for (var i = 0; i < arr.length; i++) {
+        if(arr[i] < pivot) {
+            left.push(arr[i]);
+        } else {
+            right.push(arr[i]);
+        }
+    }
+    
+	  //递归执行以上操作,对左右两个数组进行操作，直到数组长度为<=1；
+    return quickSort(left).concat([pivot], quickSort(right)); 
+}
+    console.log(quickSort(arr));
+
+//[1, 2, 3, 4, 5, 6, 7]
+
+/*
+ * 1.基准为4时，第一次分区得到左右两个子集[ 3, 1, 2]   4   [6, 5, 7];
+ * 2.先对左边的数组进行排序，基准为1，对左边的子集[3,2]进行排序,得到[2] 3。左子集排序结果：1，2，3
+ * 3.再对右边的数组进行排序，基准为5，对右边的子集[6,7]进行排序，得到[6],7.右子集排序结果：5，6，7
+ * 4.数组的合并  1，2，3，4，5，6，7
+ */
+  
+  </script>
+</body>
+</html>

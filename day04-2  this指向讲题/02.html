@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //函数自调用是指向window
+    
+   
+    var myObject = {
+      foo: 'bar',
+      func: function () {
+        var self = this;
+        console.log(this.foo);
+        console.log(self.foo);
+        (function () {
+          console.log(this.foo);
+          console.log(self.foo);
+        })();
+      }
+    };
+    myObject.func();
+  </script>
+</body>
+
+</html>

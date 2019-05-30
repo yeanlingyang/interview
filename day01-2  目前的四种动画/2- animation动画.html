@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .ani1 {
+      display: flex;
+    }
+    .box1 {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+    }
+    .box2 {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+    }
+    .box2 .air {
+      width: 300px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      background-color: teal;
+      color: #fff;
+      animation: marginMan 2s infinite;
+      border-radius: 10px;
+    }
+    .flyin {
+      width: 400px;
+      height: 400px;
+      background-color: firebrick;
+      position: relative;
+    }
+    @keyframes marginMan {
+      0% {
+        margin-left: 0px;
+      }
+      20% {
+        margin-left: -30px;
+      }
+      50% {
+        margin-left: 0px;
+      }
+      100% {
+        margin-left: 0px;
+      }
+    }
+    .flyIn {
+      animation: flyIn 1.5s linear 1;
+      animation-fill-mode: forwards;
+    }
+    .flyOut {
+      animation: flyIn 1.5s linear 1;
+      animation-fill-mode: forwards;
+      animation-direction: reverse;
+    }
+    @keyframes flyIn {
+      0%{
+        top: 400px;
+        opacity: 0;
+      }
+      100% {
+        top: 0;
+        opacity: 1;
+      }
+    }
+    .ready {
+      opacity: 0;
+    }
+    .test {
+      width: 20px;
+      height: 20px;
+      background-color: black;
+      align-self: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="ani1">
+      <div class="box1">
+          <img src="./傻吊图.jpg" width='400'>
+      </div>
+      <div class="box2">
+        <div class="air">一般空调</div>
+      </div>
+      <div class='flyin'></div>
+      <div class="test"></div>
+  </div>
+  <button>动啊！</button>
+  <button>动啊！</button>
+  <button>准备</button>
+  <script>
+    var fly = document.querySelector('.flyin');
+    var btn = document.querySelector('button');
+    var btn2 = document.querySelectorAll('button')[1];
+    var btn3 = document.querySelectorAll('button')[2];
+    btn.onclick = function() {
+      fly.classList.toggle('flyIn');
+    }
+    btn2.onclick = function() {
+      fly.classList.toggle('flyOut');
+    }
+    btn3.onclick = function() {
+      fly.classList.toggle('ready');
+    }
+  </script>
+</body>
+</html>

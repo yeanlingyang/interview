@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+// keys方法的返回值: 一个表示给定对象的 所有可枚举属性的 字符串数组
+// 数组中属性名的排列顺序和使用, 循环遍历该对象时返回的顺序一致 。
+console.dir(Object);
+
+// 返回值
+// 一个表示给定对象的所有可枚举属性的字符串数组。
+
+
+// 传入数组，返回索引
+var arr = ['a', 'b', 'c'];
+console.log(Object.keys(arr)); // console: ['0', '1', '2']
+
+var arr = [1, 2,3];
+console.log(Object.keys(arr)); // console: ['0', '1', '2']
+
+
+
+// 传入对象，返回属性名
+var obj = { a: 'alive', b: 'bike', c: 'color' };
+console.log(Object.keys(obj)); // console: ['a', 'b', 'c']
+
+// 例子
+var obj = {
+  umdDev: {
+    format: 'umd',
+    env: 'development'
+  },
+  umdProd: {
+    format: 'umd',
+    env: 'production'
+  },
+  commonjs: {
+    format: 'cjs'
+  },
+  esm: {
+    format: 'es'
+  }
+}
+
+console.log(Object.keys(obj));
+  
+  
+
+
+
+  </script>
+</body>
+</html>

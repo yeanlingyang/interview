@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    //预解析的先后顺序  
+      // 函数的形参 -> function -> var。
+      // 而且重名时预留函数、后来者覆盖前者。
+      // 预解析结果  形参如果有值则解析到值，没有则为underfined，
+      // 函数则解析到整个函数体，变量都为underfined
+      
+      // 函数声明式 提升整体
+      // 函数表达式  提升变量
+
+
+
+    // 以下代码执行输出结果是什么
+    (function d(num) {
+      console.log(num);//100
+      var num = 10;
+    }(100));
+
+      (function e(num) {
+        function num() { };
+        // var num = 100
+        // num = function  //num的赋值会把100给覆盖掉，所以当前的null等于function
+        console.log(num);//  函数体 ƒ num() { }
+        var num = 10;
+      }(100));
+
+      (function f(num) {
+        function num() { };
+        console.log(num);//函数体 ƒ num() { }
+        var num = 10
+        console.log(num);//10
+      }(100));
+
+
+
+
+      //预解析过程
+    //   (function d(num) {
+    //   var  num = 100
+    //   console.log(num);          //100
+    //    num = 10;           
+    // }(100))
+
+    //   (function e(num) {
+    //     var  num = 100
+    //     function num() { };
+    //     console.log(num);    //函数num
+    //     num = 10;
+        
+    //   }(100))
+
+      // (function f(num) {
+      //   var num = 100;
+      //   function num() { };
+      //   console.log(num);   //函数num
+      //   num = 10
+      //   console.log(num);  //10
+      // }(100))
+
+    
+
+    // 自调用匿名函数最后的分号问题
+    // 通常在 JavaScript 中，如果语句分别放置在不同的行中，则分号（;）是可选的，
+    //但是对于自调用匿名函数来说，在之前或之后省略分号都可能会引起语法错误
+
+
+
+
+
+
+
+
+
+
+
+
+    //仍然是预解析(在与解析过程中还要考虑一下当前变量的作用于)
+    // function m () {
+    //     console.log(a1); // underfined
+    //     console.log(a2); // underfined
+    //     console.log(b1); // underfined
+    //     console.log(b2); // underfined
+    //     if(false) {
+    //         function b1 (){};
+    //         var a1 = 10;
+    //     }
+    //     if(true) {
+    //         function b2 (){};
+    //         var a2 = 10;
+    //     }
+    //     console.log(a1); // underfined
+    //     console.log(a2); // 10
+    //     console.log(b1); // underfined
+    //     console.log(b2); // function
+    // }
+    // m();
+
+    // function n() {
+    //     if(2>1) {
+    //         arr = 10;
+    //         brr = 10;
+    //         let arr;
+    //         var brr;
+    //         console.log(arr);
+    //         console.log(brr);
+    //     }
+    // }
+    // n(); // ReferenceError
+  </script>
+</body>
+
+</html>

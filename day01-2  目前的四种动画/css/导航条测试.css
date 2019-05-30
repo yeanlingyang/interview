@@ -1,0 +1,382 @@
+body {
+  height: 2000px;
+  background-color: #000;
+}
+@media screen and (min-width: 1367px) {
+  .w {
+    width: 1332px;
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 1280px) and (max-width: 1366px) {
+  .w {
+    width: 1258px;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 1279px) {
+  .w {
+    width: 1172px;
+    margin: 0 auto;
+    margin-left: 44px;
+  }
+}
+/*------故宫导航 GG_nav------*/
+div.GG_nav {
+  min-width: 1260px;
+  height: 48px;
+  background-color: rgba(25, 25, 25, 0.6);
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+div.GG_nav .logo {
+  width: 115px;
+  height: 40px;
+  background: url("../images/public/MajorLogo.png");
+  background-size: 100% 100%;
+  margin-top: 5px;
+  margin-left: 40px;
+}
+div.GG_nav .logo a {
+  display: block;
+  height: 100%;
+  font-size: 0px;
+}
+@media screen and (min-width: 1280px) {
+  div.GG_nav ul.nav {
+    width: 800px;
+  }
+}
+div.GG_nav .nav {
+  position: absolute;
+  top: 0;
+  left: 47.3%;
+  transform: translateX(-50%);
+}
+div.GG_nav .nav li {
+  float: left;
+}
+@media screen and (min-width: 1367px) {
+  div.GG_nav .nav li a {
+    padding: 0 15px;
+    margin: 0 20px;
+  }
+}
+@media screen and (min-width: 1280px) and (max-width: 1366px) {
+  div.GG_nav .nav li a {
+    padding: 0 15px;
+    margin: 0 20px;
+  }
+}
+@media screen and (max-width: 1279px) {
+  div.GG_nav .nav li a {
+    padding: 0 5px;
+    margin: 0 20px;
+  }
+}
+div.GG_nav .nav li > a {
+  display: block;
+  height: 48px;
+  line-height: 48px;
+  color: #fff;
+  font-size: 15px;
+  position: relative;
+}
+div.GG_nav .nav li > a .listIcon {
+  width: 18px;
+  height: 10px;
+  background-image: url(../images/public/arrow1.png);
+  background-position: -9px 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+div.GG_nav .nav li > a:hover {
+  color: #c2a680;
+}
+div.GG_nav .nav li:first-child a:hover::after {
+  display: none;
+}
+div.GG_nav .function {
+  margin-right: 15px;
+}
+div.GG_nav .function .item {
+  height: 48px;
+  position: relative;
+  padding-left: 15px;
+}
+div.GG_nav .function .item::after {
+  content: "";
+  width: 1px;
+  height: 20px;
+  background-color: #fff;
+  position: absolute;
+  right: 0;
+  top: 15px;
+}
+div.GG_nav .function .item:last-child::after {
+  display: none;
+}
+div.GG_nav .function .item .img {
+  margin-top: 15px;
+  margin-right: 20px;
+  width: 33px;
+  height: 20px;
+}
+div.GG_nav .function .item .img .icon {
+  width: 15px;
+  height: 18px;
+}
+div.GG_nav .function .item .img .list {
+  margin-top: 8px;
+  margin-right: 3px;
+  width: 6px;
+  height: 5px;
+  background: url(../images/public/listArrow_03.png);
+}
+div.GG_nav .function .item.account .icon {
+  background: url(../images/public/ico_tools_search2.png);
+  background-size: 15px 36px;
+  background-repeat: no-repeat;
+}
+div.GG_nav .function .item.account .img:hover .icon {
+  background-position: 0 -19px;
+}
+div.GG_nav .function .item.language .icon {
+  background: url(../images/public/zhong.png);
+  background-size: 15px 36px;
+  background-repeat: no-repeat;
+}
+div.GG_nav .function .item.language .img:hover .icon {
+  background-position: 0 -21px;
+}
+div.GG_nav .function .item.search .icon {
+  background: url(../images/public/ico_tools_user2.png);
+  background-size: 15px 36px;
+  background-repeat: no-repeat;
+}
+div.GG_nav .function .item.search .img:hover .icon {
+  background-position: 0 -21px;
+}
+div.GG_nav .function .item .outbox {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: -10px;
+  width: 80px;
+  height: 60px;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  opacity: 0;
+}
+div.GG_nav .function .item .outbox a {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  box-sizing: border-box;
+}
+div.GG_nav .function .item .outbox a:first-child {
+  border-bottom: 1px solid #fff;
+}
+div.GG_nav .function .item .outbox a:hover {
+  color: #c2a680;
+}
+div.GG_nav .function .item .searchbox {
+  width: 280px;
+  height: 40px;
+  background-image: url(../images/public/search.png);
+  background-color: transparent;
+  display: flex;
+  position: absolute;
+  top: 55px;
+  right: 22px;
+}
+div.GG_nav .function .item .searchbox input {
+  width: 240px;
+  height: 40px;
+  color: #fff;
+  font-size: 14px;
+  background-color: transparent;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+div.GG_nav .function .item .searchbox button {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+}
+div.GG_nav .button {
+  width: 34px;
+  height: 34px;
+  box-sizing: border-box;
+  background-image: url(../images/public/menu2.png);
+  background-size: 34px 68px;
+  margin-top: 7px;
+  margin-right: 25px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+div.GG_nav .button:hover {
+  background-position: 0 -34px;
+}
+.nav_subnav {
+  min-width: 1260px;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 48px;
+  box-sizing: border-box;
+}
+.nav_subnav ul {
+  min-width: 1260px;
+  width: 100%;
+  height: 50px;
+  background-image: url(../images/public/black60.png);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  display: none;
+}
+.nav_subnav li {
+  height: 100%;
+  float: left;
+}
+.nav_subnav li a {
+  height: 100%;
+  display: block;
+  padding: 0 28px;
+  line-height: 50px;
+  color: #fff;
+  font-size: 15px;
+  position: relative;
+}
+.nav_subnav li a::after {
+  content: '';
+  height: 16px;
+  width: 6px;
+  background: url(../images/public/img6.png) no-repeat;
+  background-size: 6px 18px;
+  position: absolute;
+  right: -3px;
+  top: 16px;
+}
+.nav_subnav li a:hover {
+  color: #c2a680;
+}
+.nav_subnav li:last-child a::after {
+  display: none;
+}
+@media screen and (min-width: 1367px) {
+  div.GG_navBox {
+    padding-top: 100px;
+  }
+}
+@media screen and (min-width: 1280px) and (max-width: 1366px) {
+  div.GG_navBox {
+    padding-top: 78px;
+  }
+}
+@media screen and (max-width: 1279px) {
+  div.GG_navBox {
+    padding-top: 60px;
+  }
+}
+div.GG_navBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 1260px;
+  height: 100%;
+  background: url(../images/public/nav_bg.jpg) no-repeat;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+div.GG_navBox .close {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: url(../images/public/navbar_close.png) no-repeat center center;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+div.GG_navBox .close:hover {
+  transform: rotate(180deg);
+}
+div.GG_navBox dl {
+  width: 160px;
+  text-align: center;
+}
+div.GG_navBox dl dt {
+  font-size: 26px;
+  height: 87px;
+  line-height: 30px;
+  position: relative;
+}
+div.GG_navBox dl dt a {
+  color: #fff;
+}
+div.GG_navBox dl dt::after {
+  content: '';
+  height: 26px;
+  width: 18px;
+  background: url(../images/public/nav_liststyle.png) no-repeat 0 top, url(../images/public/nav_dot.png) no-repeat 0 bottom;
+  position: absolute;
+  left: 50%;
+  bottom: 13px;
+  transform: translateX(-50%);
+}
+div.GG_navBox dl dd {
+  height: 32px;
+  line-height: 32px;
+  font-size: 16px;
+}
+div.GG_navBox dl dd a {
+  color: #eaa1a1;
+}
+.nav_subnav_data {
+  min-width: 1260px;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  opacity: 0;
+}
+.nav_subnav_data ul {
+  min-width: 1260px;
+  width: 100%;
+  height: 50px;
+  background-image: url(../images/public/black60.png);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.nav_subnav_data li {
+  height: 100%;
+  float: left;
+}
+.nav_subnav_data li a {
+  height: 100%;
+  display: block;
+  padding: 0 28px;
+  line-height: 50px;
+  color: #fff;
+  font-size: 15px;
+  position: relative;
+  cursor: default;
+}

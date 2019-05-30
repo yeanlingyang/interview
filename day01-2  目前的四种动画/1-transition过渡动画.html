@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      transition: all 2s linear;
+      display: block;
+      /* opacity: 1; */
+      position: absolute;
+    }
+    .left1 {
+      left: 100px;
+    }
+    .right1 {
+      right: 100px;
+    }
+    .right2 {
+      right: 800px;
+    }
+    .hide {
+      display: none;
+      /* opacity: 0; */
+    }
+    .Opacity {
+      opacity: 0;
+    }
+    .flyin {
+      right: 50%;
+      background-color: teal;
+    }
+    .ani  {
+      transform: translateY(150px);
+      opacity: 0;
+    }
+    
+  </style>
+</head>
+<body>
+  <button>定位1</button>
+  <button>定位2</button>
+  <button>定位3</button>
+  <button>切换</button>
+  <button>飞入</button>
+  <div></div>
+
+  <div class="flyin ani"></div>
+  <script> 
+    var btns = document.querySelectorAll('button');
+    var div = document.querySelector('div');
+    var fly = document.querySelector('.flyin')
+    btns[0].onclick = function() {
+      div.className = 'left1';
+    }
+    btns[1].onclick = function() {
+      div.className = 'right1';
+    }
+    btns[2].onclick = function() {
+      div.className = 'right2';
+    }
+    btns[3].onclick = function() {
+      div.classList.toggle('hide');
+    }
+    btns[4].onclick = function() {
+      fly.classList.toggle('ani');
+    }
+  </script>
+</body>
+</html>

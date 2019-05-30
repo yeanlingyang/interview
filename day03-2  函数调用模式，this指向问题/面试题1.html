@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+
+
+
+    
+    
+    
+    
+    
+    // a++   先赋值再自增
+    // ++a   先自增再赋值
+
+    // a--    先赋值再自减
+    // --a    先自减再赋值
+
+
+
+    //1. 函数调用模式  fn()   this: window
+    // 2. 方法调用模式  obj.xx()  this: 指向调用者
+    // 3. 构造函数调用模式  var p = new Person();  this: 实例p
+    // 4. 上下文调用模式, 想让this指向谁, this就指向谁
+   
+
+
+
+
+
+
+
+    var a = 1, b = 2, x = 0;
+    if (!(--a)) {
+      x--;
+    }
+    if (!b) {
+      x = 7
+    } else {
+      ++x
+    }
+    console.log(x);
+
+
+
+
+
+
+
+
+
+    var a = 5;
+    function test() {
+      a = 0;
+      console.log(a);;
+      console.log(this.a);
+      var a;
+      console.log(a);
+    }
+    test();
+    new test()
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

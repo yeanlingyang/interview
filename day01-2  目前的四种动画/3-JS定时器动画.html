@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      height: 2000px;
+      background-image: linear-gradient(to bottom, violet, teal);
+    }
+
+    div {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      position: fixed;
+      bottom: 100px;
+      right: 100px;
+      background-color: firebrick;
+      background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
+      opacity: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+
+  <script>
+    var div = document.querySelector('div');
+    function controlOpacity(element, target) {
+      clearInterval(element.timeId);
+      //获取当前透明度
+      var current = 10 * element.style.opacity;
+      //根据透明度动态设置是淡出还是显示
+      var step = current > target ? -1 : 1;
+      //设置定时器
+      element.timeId = setInterval(function () {
+        if (current === target) {
+          clearInterval(element.timeId);
+        } else {
+          current += step;
+          element.style.opacity = current / 10 + "";
+        };
+      }, 40);
+    }
+    window.onscroll = function () {
+      var distance = window.pageYOffset || document.documentElement.scrollHeight || document.body.scrollHeight;
+      if (distance >= 500) {
+        controlOpacity(div, 10);
+      }else {
+        controlOpacity(div, 0);
+      }
+    }
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

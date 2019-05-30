@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    var x = 3;
+    var y = 4;
+    var obj = {
+      x: 1,
+      y: 6,
+      getX: function () {
+        var x = 5;
+        //返回的是一个函数体，函数体的返回值指向window
+        return function () {
+          return this.x;
+        }();
+      },
+      getY: function () {
+        var y = 7;
+        return this.y;
+      }
+    }
+    console.log(obj.getX());//3
+    console.log(obj.getY());//6
+
+
+  </script>
+</body>
+
+</html>
