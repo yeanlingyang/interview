@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* .conter {
+      height:300px;
+      padding-left: 100px;
+      padding-right: 100px;
+      position: relative;
+    }
+    .left {
+      width: 100px;
+      height: 300px;
+ background-color: pink;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .right {
+      width: 100px;
+      height: 300px;
+      background-color: skyblue;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .center {
+    height: 300px;
+      background-color: teal;
+    } */
+
+/* .left{
+  width: 100px;
+  height: 200px;
+  background-color: pink;
+  float:left;
+}
+.right{
+
+  width: 100px;
+  height: 200px;
+  background-color: skyblue;
+  float:right;
+}
+.center{
+  width: 100%;
+  height: 200px;
+  background-color: teal;
+} */
+.box{
+height: 300px;
+  display:flex;
+}
+.left{
+  width: 100px;
+  height: 300px;
+  background-color:pink;
+}
+.right{
+  width: 100px;
+  height: 300px;
+  background-color: skyblue;
+}
+.center{
+  flex:1;
+  height: 300px;
+  background-color: teal;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <!-- 利用定位实现中间自适应 -->
+  <!-- <div class='conter'>
+    <div class='left'></div>
+    <div class="center"></div>
+    <div class="right"></div>
+  </div> -->
+
+
+  <!--利用浮动实现中间自适应 -->
+  <!-- <div class="left"></div>
+  <div class="right"></div>
+  <div class="center"></div> -->
+
+
+  <!-- 利用flex布局实现中间自适应 -->
+  <div class='box'>
+<div class="left"></div>
+<div class="center"></div>
+<div class="right"></div>
+
+  </div>
+</body>
+
+</html>

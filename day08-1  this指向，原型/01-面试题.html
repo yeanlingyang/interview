@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    function C1(name) {
+      if (name) this.name = name;
+      console.log(name);  //undefined  不传参，所以if里面的不执行  直接找自己原型上的参数
+    }
+    function C2(name) {
+      this.name = name;
+      console.log(name);  //undefined
+    }
+    function C3(name) {
+      this.name = name || 'John';
+    }
+    C1.prototype.name = "Tom";
+    C2.prototype.name = "Tom";
+    C3.prototype.name = "Tom";
+
+    console.log((new C1().name)+(new C2().name)+(new C3().name));//TomundefinedJohn
+                  //Tom           //undefined       John
+  </script>
+</body>
+
+</html>

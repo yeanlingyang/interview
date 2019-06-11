@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var length = 10
+
+    function fn() {
+      console.log(this.length)
+    }
+    var obj = {
+      length: 5,
+      method: function (fn) {
+        fn();
+        arguments[0]();
+      }
+    }
+    obj.method(fn, 20, 30);
+
+
+
+// 看函数的this指向, 只看怎么调用的, 不看怎么定义的
+
+    var length = 8;
+    function fn() {
+      console.log(this.length);
+    }
+    var obj = {
+      length: 5,
+      fn: function () {
+        console.log(this.length);
+      }
+    };
+    var arr = [fn, 20, obj.fn, 15];
+
+
+    fn();
+    arr[0]();
+    arr[2]();
+
+
+  </script>
+</body>
+
+</html>

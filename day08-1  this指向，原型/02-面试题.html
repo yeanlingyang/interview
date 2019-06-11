@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 看函数的this指向, 只看怎么调用的, 不看怎么定义的
+    // 1. 函数调用模式,  fn()  this指向window
+    // 2. 方法调用模式,  obj.fn()  this指向调用者, 谁调用, 指向谁
+    
+    window.val = 1;  //2
+    var json = {
+      val: 10,  //20
+      dbl: function () {
+        this.val *= 2;  //4
+      }
+    };
+    json.dbl(); //  20
+    // console.log(json.val);
+    var dbl = json.dbl;
+    dbl();//指向window   //2   
+    // console.log(window.val);
+
+    json.dbl.call(window);  // 指向window   全局的 已经改成了4
+    // console.log(window.val);
+    alert(window.val + json.val);  //24
+            //4         //20
+
+
+  </script>
+</body>
+
+</html>

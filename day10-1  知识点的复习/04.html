@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.设高法  (直接给父元素设高度)
+
+
+    // 2.额外标签法
+    // （1）在父元素的内容的最后面，添加一个块级元素。
+    // （2）给新添加的元素设置clear:both;清除上面盒子带来的影响
+    // 缺点：需要额外的标签，添加了很多布局无关的元素
+    // 作用：只是清楚了浮动
+
+
+    // 3.单伪元素法
+    // 只能用  :after在元素的内容最后面，添加一个行内的伪元素
+    // .clearfix::after{
+    // content:'';
+    // display:block;
+    // clear:both;
+    // height:0;
+    // line-height:0;
+    // visibility:hidden;
+    // }
+
+
+    // 4.overflow:hidden
+    // 让盒子成为一个bfc盒子，可以清楚浮动带来的影响
+
+  </script>
+</body>
+
+</html>

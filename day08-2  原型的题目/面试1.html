@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  // 原型的注意点:
+  // 添加给构造函数的成员, 实例访问不到的  (给老妈加, 拿不到)
+  // 添加到原型的成员, 实例可以访问到的!!! (给老爸加, 可以拿到的)
+
+  
+  // 第一题
+  // function A() {} //A身上没有，找原型
+  // function B(a) {   //var a;    身上有，所以找自己的
+  //     this.a = a;   //undefined //原型上有 a=1
+  // }
+  // function C(a) {
+  //   var a = 2   //自己身上有，var a =2 ，原型上a=1
+  //     if (a) {
+  //         this.a = a;
+  //     }
+  // }
+  // A.prototype.a = 1;
+  // B.prototype.a = 1;
+  // C.prototype.a = 1;
+
+  // console.log(new A().a);  //1
+  // console.log(new B().a);  //undefined 
+  // console.log(new C(2).a); //2
+
+
+  // // // 第二题
+  // // instanceof用于判断一个变量是否某个对象的原型链上
+  // var F = function() {};
+  function F() {}
+
+  // Object.prototype.a = function() {
+  //   console.log("a()");
+  // };
+
+  // Function.prototype.b = function() {
+  //   console.log("b()");
+  // };
+
+  // var f = new F(); 
+  // console.log(f instanceof Function) //false
+  // console.log(f instanceof F) //true
+  // console.log(F instanceof Object);// true
+  // console.log(F instanceof Function); //true
+  // //f并不是Function的实例，所以就不能调用Function原型链上的相关属性和方法了，只能访问Object原型链。
+  // F.a();//a()  F自身: 没有 ---> F._proto_(Function.prototype): 没有 =>F._proto_._proto_(Object.prototype): 输出 a()
+  // F.b();//b()  F自身: 没有 ---> F._proto_(Function.prototype): b()
+  // f.a();//a()  f自身: 没有 ---> f._proto_(Object.prototype): 输出a()
+  // f.b();//报错 f自身: 没有 ---> f._proto_(Object.prototype): 没有
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//第三题     不讲
+//   function Parent() {
+//   this.a = 1;
+//   this.b = [1, 2, this.a];
+//   this.c = { demo: 5 };
+//   this.show = function () {
+//       console.log(this.a , this.b , this.c.demo );
+//   }
+//   }
+//   function Child() {
+//   this.a = 2;
+//   this.change = function () {
+//   this.b.push(this.a); //b.length = 4
+//   this.a = this.b.length;//a=4
+//   this.c.demo = this.a++;//a=5 c=5
+//   }
+//   }
+//   Child.prototype = new Parent(); //原型指向构造函数Parent
+//   var parent = new Parent();
+//   var child1 = new Child();
+//   var child2 = new Child();
+//   child1.a = 11;  //自己有
+//   // child2.a = 12;  //自己有
+//   parent.show() //a 1 ,b [1,2,1] ,c 5
+//   child1.show();//a 11 ,b[1,2,1],c 5
+//   // child2.show();//a 12 ,b[1,2,1], c5
+//   child1.change();
+//   // child2.change();
+//   parent.show();  
+//   // child1.show();
+//   // child2.show();
+
+
+
+
+</script>
+</body>
+</html>

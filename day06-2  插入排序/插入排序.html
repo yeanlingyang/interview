@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // 插入排序法的原理
+    // 原理是每插入一个数都要将它和之前的已经完成排序的序列进行重新排序，也就是要找到新插入的数对应原序列中的位置。那么也就是说，每次插入一个数都要对原来排序好的那部分序列进行重新的排序。
+
+    // 从小到大排序
+    var array = [2, 5, 7, 3, 1, 8, 4, 6, 9];
+
+    // 第一趟
+    // 用数组的第二个数与第一个数比较
+    // 如果比第一个数大，那就不管他
+    // 如果比第一个数小，将第一个数往后退一步，将第二个数插入第一个数去
+    // 用数组的第三个数与已是有序的数据{2,3}(刚才在第一趟排的)比较
+   
+    // 第二趟
+    // 用第三个数和前两个数比较
+    // 如果比第二个数大，那就不管它
+    // 如果比第二个数小，那就将第二个数退一个位置，让第三个数和第一个数比较 
+    // 如果第三个数比第一个数大，那么将第三个数插入到第二个数的位置上
+    // 如果第三个数比第一个数小，那么将第一个数后退一步，将第三个数插入到第一个数的位置上
+    // ......依次下去
+    for (var i = 1; i < array.length; i++) {
+      var temp = array[i];
+      for (var j = i - 1; j >= 0; j--) {
+        //将大于temp的数向后移动一步
+        if (array[j] > temp) {
+          array[j + 1] = array[j];//记录j的值也就是temp要插入的位置
+        } else {
+          break;
+        }
+      }
+      array[j + 1] = temp;
+    }
+    console.log(array);
+  </script>
+</body>
+
+</html>

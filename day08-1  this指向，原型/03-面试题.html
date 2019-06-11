@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //  规则: 只有这6种情况, 0 "" NaN null undefined  false 可以转成 false, 其他所有值, 都是true
+    // var a;
+    // var b = a * 0;
+    // if (b == b) {
+    //   console.log(b * 2 + "2" - 0 + 4);
+    // } else {
+    //   console.log(!b * 2 + "2" - 0 + 4);  //26
+    // }  
+
+
+    // var a = 1;
+    // var b = a * 0;
+    // if (b == b) {
+    //   console.log(b * 2 + "2" - 0 + 4);  //6
+    // } else {
+    //   console.log(!b * 2 + "2" - 0 + 4);
+    // }
+
+
+
+    // var a;
+    // var b = a / 0;
+    // if (b == b) {
+    //   console.log(b * 2 + "2" - 0 + 4);
+    // } else {
+    //   console.log(!b * 2 + "2" - 0 + 4);  //26
+    // }
+
+
+    var a = 1;
+    var a;
+    var b = a / 0;  //任意一个数除以0 都是无限大的都是infinity
+    if (b == b) {
+      console.log(b * 2 + "2" + 4);  //Infinity24
+    } else {
+      console.log(!b * 2 + "2" + 4);
+    }
+
+  </script>
+
+
+</body>
+
+</html>
