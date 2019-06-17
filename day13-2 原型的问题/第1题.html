@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      // 题：请封装一个getType函数，获取对象的具体类型？
+          // 思路：让函数借用 Object.prototype的 toString 方法 => call 方法调用模式
+
+
+
+
+
+
+
+        function fn(){
+            console.log(111);
+        }
+
+        // fn ==> Function.prototype ==> Object.prototype ==> null;
+        //          toString                 toString
+
+        // 让fn去借用 Object.prototype的 toString 方法
+        console.log(Object.prototype.toString.call(fn));  // "[object Function]"
+        // 相当于：
+        // fn.toString()
+        
+        console.log(Object.prototype.toString.call([]));  // "[object Array]"
+        // 把Object.prototype.toString.call 能力给封装起来
+
+
+        // 答案：
+        function getType(obj){
+            return Object.prototype.toString.call(obj).slice(8, -1);
+        }
+        // console.log(getType([]));  // Array
+        // console.log(getType(new Date()));  //Date
+        // console.log(getType({}));  // Object
+        // console.log(getType( function fn(){} ));  // Function
+
+
+        // 小拓展：
+        // stringObject.slice(start,end);
+        // start:要抽取的片断的起始下标。如果是负数，则该参数规定的是从字符串的尾部开始算起的位置。
+        // 也就是说，-1 指字符串的最后一个字符，-2 指倒数第二个字符，以此类推。
+        // end	紧接着要抽取的片段的结尾的下标。若未指定此参数，则要提取的子串包括 start 到原字符串结尾的字符串。
+        // 如果该参数是负数，那么它规定的是从字符串的尾部开始算起的位置。
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // ================================   reduce()   ================================ 
+
+    //1. reduce()求数组项之和
+
+    // var arr = [3, 9, 4, 3, 6, 0, 9];
+
+    // var sum = arr.reduce(function (prev, cur) {
+
+    //   return prev + cur;
+
+    // },0);
+
+    // console.log(sum);
+
+
+    //2. reduce()求数组项最大值
+
+    // var arr = [3, 9, 4, 3, 6, 0, 9];
+
+
+
+    // var max = arr.reduce(function (prev, cur) {
+
+    //   return Math.max(prev, cur);
+
+    // });
+
+    // console.log(max);
+
+    //3. reduce()实现数组去重
+    //indexOf() 返回值都是数组中元素所在的下标，如果没有找到则返回-1
+
+    // var arr = [3, 9, 4, 3, 6, 0, 9];
+
+    // var newArr = arr.reduce(function (prev, cur) {
+
+    //   prev.indexOf(cur) === -1 && prev.push(cur);
+
+    //   return prev;
+
+    // }, []);
+
+    // console.log(newArr);
+
+    // 实现原理：
+    // 1 初始化一个空数组
+    // 2 将需要去重处理的数组中的第1项在初始化数组中查找，如果找不到（空数组中肯定找不到），就将该项添加到初始化数组中
+    // 3 将需要去重处理的数组中的第2项在初始化数组中查找，如果找不到，就将该项继续添加到初始化数组中
+    // 4 ……
+    // 5 将需要去重处理的数组中的第n项在初始化数组中查找，如果找不到，就将该项继续添加到初始化数组中
+    // 6 将这个初始化数组返回
+
+
+
+    // ================================   includes()   ================================  
+
+    // includes()用来判断一个数组是否包含一个指定的值
+
+    // var array1 = [1, 2, 3];
+
+    // console.log(array1.includes(2));
+
+
+    // ================================   拓展   ================================
+
+    //1.find()
+    // find方法中如果没有写return就会把判断条件执行完，然后输出所有符合条件的元素，如果写了return，不管return后边写了什么值，都会返回找到的第一个符合条件的元素
+
+    // let arr = [1, 2, 234, 'sdf', -2];
+
+    // // arr.find(function (v) {
+
+    // //   return v <= 2;
+
+    // // })//find找到第一个符合条件的元素，也就是1
+
+
+    // arr.find(function (v, i, arr) {
+
+    //   if (v < 2) {
+
+    //     console.log(v, i, arr)
+
+    //   }
+
+    //   // return arr
+
+    // })
+
+
+    //2. findIndex()
+    //findIndex同find方法一样，如果没有写return就会返回所有符合条件的元素的下标，如果写了return就会返回第一个符合条件的元素的下标
+
+    // let arr = [1, 2, 234, 'sdf', -2];
+
+    // arr.findIndex(function (v) {
+
+    //   return v <= 2;
+
+    // })//findIndex方法找到小于等于2的值，并返回他的下标
+
+
+    // arr.findIndex(function (v, i, arr) {
+
+    //   if (v < 2) { console.log(v, i, arr) }
+
+    //   // return v;
+
+    // })
+
+
+
+  </script>
+</body>
+
+</html>

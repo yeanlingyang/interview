@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+  // 1. 函数调用模式  fn()   this: window
+  // 2. 方法调用模式  obj.xx()  this: 指向调用者
+  // 3. 构造函数调用模式  var p = new Person();  this: 实例p
+
+  // 4. 上下文调用模式, 想让this指向谁, this就指向谁
+  //    call  apply   bind
+  //    fn.call(this指向, 参数1, 参数2, 参数3);  调用函数, 并且指定 this 的指向
+  //    fn.apply(this指向, [参数1, 参数2, 参数3]);  如果参数很多, 可以放在一个数组中, 此时用 apply 比较方便
+
+  //    var newFn = fn.bind(this指向);    作用: 复制一个新函数, 并且绑定死 新函数的 this指向
+
+  // 看不见的调用: 需要记忆
+  // (1) 定时器里面的 this, 指向 window
+  // (2) 事件处理函数的 this, 指向 事件源
+
+
+  </script>
+</body>
+
+</html>

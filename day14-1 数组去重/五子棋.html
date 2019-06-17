@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>canvas五子棋</title>
+  <style>
+    /*棋子板{*/
+		#chess {
+			display: block;
+			position: absolute;
+			top: 8px;
+		}
+		/*}棋子板*/
+		/*背景板{*/
+		#bgchess {
+			display: block;
+			border: 1px solid black;
+		}
+		/*}背景板*/
+		/*按钮位置{*/
+		#g-footer{
+			margin-top: 30px;
+			margin-left: 120px;
+		}
+		#g-footer button {
+			height: 30px;
+			width: 100px;
+		}
+		/*}按钮位置*/
+	</style>
+</head>
+
+<body>
+  <canvas id="bgchess" width="450px" height="450px">你的浏览器不支持HTML5 canvas,请使用最新版Chrome浏览器打开.</canvas>
+  <canvas id="chess" width="450px" height="450px"></canvas>
+  <div id="g-footer">
+    <button type="button" id="revert" onclick="revert()">悔棋</button>
+    <button type="button" id="removeRevert" onclick="removeRevert()">撤销悔棋</button>
+  </div>
+  <script>
+		
+    //模拟JQ的写法，提高获取元素效率
+    var $ = document.querySelectorAll.bind(document);
+    //本人偏向于把所有变量放入config中，减少全局变量数量
+    var cConfig = {
+      chessBoard: [],//二维数组用来保存棋盘信息，0为没有走过的，1为黑棋，2为白棋
+      currentChess: true,//目前正要下的棋子的颜色，初始化为true表示黑子棋子。false表示白色棋子
+      over: false,//标志游戏是否结束，有一方赢了就表示结束
+      num: 0,//已下棋子数目，设置在全局，为了悔棋功能而设;单数为黑子，偶数为白子
+      count: 0,//赢棋个数统计，5
+      chessX: [],//储存已下步数的横坐标，用于悔棋与撤销
+      chessY: [],//储存已下步数的纵坐标，用于悔棋与撤销
+      wins: [],//赢法数组，用来记录所有可能的赢法方案，
+      blackWin: [],//赢法的统计数组，分别统计黑棋和白棋在上面所有赢法方案中已经完成了几颗棋子了
+      whiteWin: []
+    }
+    //初始化棋盘信息，将二维数组所有项全部初始化为0
+    for (var i = 0; i < 15; i++) {
+      cConfig.chessBoard[i] = [];
+      for (var j = 0; j < 15; j++) {
+        cConfig.chessBoard[i][j] = 0;
+      }
+    }
+    //初始化枚举赢法的数组，为一个三维数组
+    for (var i = 0; i < 15; i++) {
+      cConfig.wins[i] = [];
+      for (var j = 0; j < 15; j++) {
+        cConfig.wins[i][j] = [];
+      }
+    }
+    //枚举所有可能的五个棋子竖直排列的情况
+    for (var i = 0; i < 15; i++) {
+      for (var j = 0; j < 11; j++) {
+        for (var k = 0; k < 5; k++) {
+          cConfig.wins[i][j + k][cConfig.count] = true;
+        }
+        cConfig.count++;
+      }
+    }
+    //枚举所有可能的五个棋子水平排列的情况
+    for (var i = 0; i < 15; i++) {
+      for (var j = 0; j < 11; j++) {
+        for (var k = 0; k < 5; k++) {
+          cConfig.wins[j + k][i][cConfig.count] = true;
+        }
+        cConfig.count++;
+      }
+    }
+    //枚举所有可能的五个棋子反斜线排列的情况
+    for (var i = 0; i < 11; i++) {
+      for (var j = 0; j < 11; j++) {
+        for (var k = 0; k < 5; k++) {
+          cConfig.wins[i + k][j + k][cConfig.count] = true;
+        }
+        cConfig.count++;
+      }
+    }
+    //枚举所有可能的五个棋子正斜线排列的情况
+    for (var i = 0; i < 11; i++) {
+      for (var j = 14; j > 3; j--) {
+        for (var k = 0; k < 5; k++) {
+          cConfig.wins[i + k][j - k][cConfig.count] = true;
+        }
+        cConfig.count++;
+      }
+    }
+    //分别初始化黑白两棋子在某种赢法的情况下已经有的棋子为0
+    for (var i = 0; i < cConfig.count; i++) {
+      cConfig.blackWin[i] = 0;
+      cConfig.whiteWin[i] = 0;
+    }
+    var chess = $('#chess')[0],//获取棋盘在dom中的元素,做一个棋子板
+      bgchess = $('#bgchess')[0],//做一个背景板
+      context = chess.getContext('2d'),
+      bgcontext = bgchess.getContext('2d');
+    context.strokeStyle = "#BFBFBF";
+    //画棋盘格14*14=196格
+    var drawChessBoard = function () {
+      for (var i = 0; i < 15; i++) {
+        bgcontext.moveTo(15 + i * 30, 15);
+        bgcontext.lineTo(15 + i * 30, 435);
+        bgcontext.moveTo(15, 15 + i * 30);
+        bgcontext.lineTo(435, 15 + i * 30);
+        bgcontext.stroke();
+      }
+    }
+		/*在某个位置画一颗棋子
+		@para i 横向第i个格子线
+		@para j 纵向第j个格子线
+		*/
+    var drawChess = function (i, j) {
+      cConfig.num++;//已下棋子数加1
+      context.beginPath();
+      context.arc(15 + i * 30, 15 + j * 30, 13, 0, 2 * Math.PI);
+      context.closePath();
+      var gradient = context.createRadialGradient(15 + i * 30, 15 + j * 30, 13, 15 + i * 30, 15 + j * 30, 0);
+      if (cConfig.currentChess) {//设置黑棋子渐变颜色
+        gradient.addColorStop(0, "#0A0A0A");
+        gradient.addColorStop(1, "#636766");
+      } else {//设置白棋子渐变颜色
+        gradient.addColorStop(0, "#D1D1D1");
+        gradient.addColorStop(1, "#F9F9F9");
+      }
+      context.fillStyle = gradient;
+      context.fill();
+    }
+		/*
+		设置鼠标点击处理事件
+		*/
+    chess.onclick = function (e) {
+      if (cConfig.over) {
+        alert("本轮游戏已经结束了，请刷新浏览器重新开始！");
+        return;
+      }
+      //获取点击的位置相当于棋盘左上角的位置
+      var x = e.offsetX;
+      var y = e.offsetY;
+      var i = Math.floor(x / 30);
+      var j = Math.floor(y / 30);
+      if (cConfig.chessBoard[i][j] === 0) {//在画棋子之前先判断一下棋盘上该位置是否已经有了棋子，为空时才允许放置
+        drawChess(i, j);//画棋子
+        if (cConfig.currentChess) {//如果放下的棋子为黑棋
+          cConfig.chessX.push(i);//存入棋子的横纵坐标
+          cConfig.chessY.push(j);
+          cConfig.chessBoard[i][j] = 1;
+          for (var k = 0; k < cConfig.count; k++) {//遍历所有赢法
+            if (cConfig.wins[i][j][k]) {
+              cConfig.blackWin[k]++;
+              cConfig.whiteWin[k] = undefined;
+              if (cConfig.blackWin[k] === 5) {//如果黑棋在第k中赢法中已经有了5颗棋子，说明黑棋赢了
+                alert('黑棋赢了！\r\n');
+                cConfig.over = true;
+              }
+            }
+          }
+        } else {//如果放下的棋子为白棋
+          cConfig.chessX.push(i);//存入棋子的横纵坐标
+          cConfig.chessY.push(j);
+          cConfig.chessBoard[i][j] = 2;
+          for (var k = 0; k < cConfig.count; k++) {
+            if (cConfig.wins[i][j][k]) {
+              cConfig.whiteWin[k]++;
+              cConfig.blackWin[k] = undefined;
+              if (cConfig.whiteWin[k] === 5) {//如果白棋在第k中赢法中已经有了5颗棋子,说明白棋赢了
+                alert('白棋赢了！\r\n');
+                cConfig.over = true;
+              }
+            }
+          }
+        }
+        cConfig.currentChess = !cConfig.currentChess;//将下一步棋的颜色进行反转		
+      }
+    }
+    //悔棋事件
+    var revert = function () {
+      if (!cConfig.over && cConfig.num != 0) {
+        i = cConfig.chessX[cConfig.num - 1];//取得最近一步棋子的横纵坐标，不用pop，因为还有撤销功能
+        j = cConfig.chessY[cConfig.num - 1];
+        context.clearRect(i * 30, j * 30, 30, 30);//干掉颜色，这个只干掉棋子板的，不会干掉背景板的
+        cConfig.chessBoard[i][j] = 0;
+        if (!cConfig.currentChess) {//把胜利统计减掉
+          for (var k = 0; k < cConfig.count; k++) {
+            if (cConfig.wins[i][j][k]) {
+              cConfig.blackWin[k]--;
+            }
+          }
+        } else {
+          for (var k = 0; k < cConfig.count; k++) {
+            if (cConfig.wins[i][j][k]) {
+              cConfig.whiteWin[k]--;
+            }
+          }
+        }
+        cConfig.currentChess = !cConfig.currentChess;
+        cConfig.num--;//已下棋子数要减1
+      } else {
+        alert('悔无可悔！\r\n');
+      }
+    }
+    //撤销悔棋事件
+    var removeRevert = function () {
+      if (!cConfig.over && cConfig.chessX[cConfig.num] != undefined) {
+        i = cConfig.chessX[cConfig.num];//撤销到之前那一步，不要num++，因为drawChess里面有num++这个函数，自动加1
+        j = cConfig.chessY[cConfig.num];
+        if (cConfig.currentChess) {
+          if (cConfig.chessBoard[i][j] == 0) {
+            drawChess(i, j);
+            cConfig.chessBoard[i][j] = 1;//黑子
+            for (var k = 0; k < cConfig.count; k++) {
+              if (cConfig.wins[i][j][k]) {
+                cConfig.blackWin[k]++;
+              }
+            }
+          }
+        } else {
+          if (cConfig.chessBoard[i][j] == 0) {
+            drawChess(i, j);
+            cConfig.chessBoard[i][j] = 2;//白子
+            for (var k = 0; k < cConfig.count; k++) {
+              if (cConfig.wins[i][j][k]) {
+                cConfig.whiteWin[k]++;
+              }
+            }
+          }
+        }
+        cConfig.currentChess = !cConfig.currentChess;
+      }
+    }
+    //初始化棋盘
+    drawChessBoard();
+  </script>
+</body>
+
+</html>

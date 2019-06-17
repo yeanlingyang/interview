@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // 闭包的概念：一个函数的内部有另一个函数，内部函数引用了外部函数的局部变量，这个模型称之为闭包
+    // 闭包的作用：可以保护变量（变量私有化），缓存数据
+    // 闭包的内存问题：闭包会占用内存，闭包的内存不会直接释放
+    // 闭包中每个函数被调用时，会创建自己的内存空间，不会互相影响
+
+    function fun(n, o) {
+      console.log(o)
+      return {
+        fun: function (m) {
+          return fun(m, n);
+        }
+      };
+    }
+    //问:三行a,b,c的输出分别是什么？
+    //1.
+    var a = fun(0); a.fun(1); a.fun(2); a.fun(3);   //undefined,?,?,?
+    //2.
+    var b = fun(0).fun(1).fun(2).fun(3);   //undefined,?,?,?
+    //3.
+    var c = fun(0).fun(1); c.fun(2); c.fun(3);   //undefined,?,?,?
+
+    //1.var a = fun(0),调用fun函数,传了一个参数是0  ，此时函数执行，打印o为undefined
+    //执行完返回一个对象
+    // a = {
+    //   fun: function (m) {
+    //     return fun(m, n);
+    //   }
+    // }
+    //然后的a.fun(1); a.fun(2);...相当于调用a指向的对象里面的方法fun,
+    // 每调用一次都会开辟自己的内存空间，互不影响
+
+    //2.var b = fun(0).fun(1).fun(2).fun(3);
+    //首先会执行fun(0),打印的o是undefined,返回一个对象
+    // {
+    //   fun:function(m){
+    //     return fun(m,n);
+    //   }
+    //此时 n = 0, o = undefined
+
+    //后面fun(1)接着又调用这个对象里面的方法fun,此时m值为1，
+    // fun(m,n),m为1，n对象里面没有，往外找，找到外面的n为0  -----相当于传递了fun(1,0)
+    //执行函数，m值传给n,n值传给o,打印o为0，此时n已经为1------ n = 1 , o = 0,
+
+    //---------函数内部嵌套一个函数，内部的引用了外部的n,形成闭包，内存不会释放--------
+    //后面接着执行fun(2),此时外面函数的n已经变为1,那么传递过去的就是 fun(2,1)
+    //执行函数，m值传给n,n值传给o,打印o为1，此时n已经为2------ n = 2 , o = 1,
+
+    //后面接着执行fun(3),此时外面函数的n已经变为1,那么传递过去的就是 fun(3,2)
+    //执行函数，m值传给n,n值传给o,打印o为2，此时n已经为3------ n = 3 , o = 2,
+
+
+    // 3、 var c = fun(0); 调用第一层函数，返回值是一个对象
+    // fun(1)执行的是fun(0)返回的第二层函数 ，所以这个时候c存放的是fun(1)的返回值
+    // fun(2) fun(3)执行的都是fun(1)返回的第二层参数
+    // 在第一次调用时，fun(0),o为undefined
+    // 在第二次调用fun(1)时m为1，n引用了外层函数的n，所以n为0，并且在内部调用第一层fun函数fun(1,0),所以o为0
+    // 在第三次调用fun(2)时m为2，n是第二次调用的n为1，并且在内部调用第一层fun函数fun(2,1),所以o为1
+    // 第四次和第三次是一样的
+
+
+
+
+  </script>
+</body>
+
+</html>

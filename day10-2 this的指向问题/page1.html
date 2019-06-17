@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    // 四种模式:
+    // 1. 函数调用模式: fn()  this: window
+    // 2. 方法调用模式: obj.xx()  this: 调用者 obj
+    // 3. 构造函数调用模式: var p = new Person();  this: 实例p
+    
+    // 4. 上下文调用模式: this在这边是可以自己指定的, 我想要this指向谁, this就指向谁
+    //    call  apply  bind
+    
+    
+    //    记忆: (1) 定时器的 this, 指向 window 
+    //          (2) 事件处理函数里面的 this 指向事件源
+
+    // 1.setInterval和setTimeout定时器中的this指向window
+    // var a = 10;
+    // var timerId = setInterval(function(){
+    // var a = 20;
+    // console.log(this.a); // 10
+    // clearInterval(timerId);
+    // },100);
+
+    // // 2.apply和call中的this指向参数中的对象
+    var a = 10;
+    var foo = {
+        a: 20,
+        fn: function(){
+            console.log(this.a);
+        }
+    };
+    var bar ={
+        a: 30
+    }
+    foo.fn.apply();//10(若参数为空，默认指向window)
+    foo.fn.apply(foo);//20
+    foo.fn.apply(bar);//30
+
+    // // 3.
+    // var obj = {
+    //   foo: 'bar',
+    //   func: function(){
+    //     var self = this;
+    //     // 在外部函数中，this和self都指向了obj ，所以都可以正确地引用和访问foo
+    //     console.log(this.foo);  //bar
+    //     console.log(self.foo);  //bar 
+    //     (function(){
+    //       //函数自调用中的this是指向window  
+    //       // 在内部函数中,this不再指向obj,而是指向window,window中并没有foo，所以为undefined
+    //       console.log(this.foo);  //undefined
+    //       // 变量self依然指向obj，可以访问
+    //       console.log(self.foo);  //bar
+    //     }());
+    //   }
+    // };
+    // // this指向obj
+    // obj.func();
+  </script>
+</body>
+</html>

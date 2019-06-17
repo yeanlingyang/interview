@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // 函数执行过程中的return说明：
+    // 1.如果不在意函数的执行结果，只需要知道函数怎么执行，则不需要return；
+    // 2. 如果函数的执行需要有明确的返回结果，必须要return；
+
+    // 作用：
+    // 一：用来返回一个值给函数，函数调用时能得到这个返回结果。
+    // 二：用来结束函数，例如你运行到一个地方，虽然后面还有代码但是你不想再继续运行，这时你就可以直接用 return；这条语句来结束函数。
+
+    // 思路：1.函数如果没有return或者没有明确的返回值，结果是undefined；
+    //      2.函数return不支持换行，因为js中有一个自动修复的机制，在程序可能有缺陷的时候，自动插入分号补全，这样就会掩盖一些错误。
+
+    //<-------------------------------------------------------------------------------------->
+    // function fn1() {
+    //   console.log(3);
+    // }
+    // console.log(fn1());
+
+    function test(){
+        var a = 12;
+        var b = 24;
+        var number
+        console.log('number: ' + number);  //number只声明了 没有赋值  所以打印的是undefined
+        return a + b;  //return 后面的语句没有执行,但是会做词法分析
+        console.log( a + b );
+        number = 12;  
+    }
+    var c = test();
+    console.log( c );//36
+
+    // function fn3(){
+    //   console.log(3);
+    //   return 
+    //   fn3();
+    // }
+    // console.log(fn3());
+
+    // function fn3(){
+    //   console.log(3);
+    //   return fn3();
+    // }
+    // console.log(fn3());
+    // fn3()一直在调用 返回后还是fn3() 然后继续执行内部的函数  一直在执行  最后形成了一个死循环
+   //<--------------------------------------------------------------------------------------------->
+
+//     var add = function(x){  
+//     var sum = 1;  
+//     // 在函数表达式内部有一个求和的内部函数  
+//     var tmp = function(x){  
+//         sum = sum + x;// 求和  
+//         return tmp;  
+//     }  
+//     // 构建一个函数体的toString()函数  
+//     tmp.toString = function(){  
+//         return sum;  
+//     }  
+//     return tmp; // 返回的是一个函数体,如果该函数体有toString()方法,则会调用函数体的toString()方法  
+// } 
+// alert(add(1)(2)(3))
+
+  </script>
+</body>
+
+</html>

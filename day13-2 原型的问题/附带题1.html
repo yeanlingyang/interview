@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    
+    问：当一个页面有大量的图片（大型电商网站）导致页面加载很慢，你有哪些方法优化这些图片的加载，[性能优化]？
+
+      答：a. 图片懒加载，滚动到相应位置才加载图片。
+          比如：借助Jquery插件：jquery.lazyload.js   
+              1. 先引入 jquery, 后引入 lazyload
+              2. 设置 img 属性
+                (1) 一开始将src的路径存储在：data-original
+                (2) 添加类名, 为了方便查找
+              3. 设置 img 的宽高
+              
+              4. 用 $("img.mylazy").lazyload(); 进行初始化
+
+
+
+          b. 图片预加载，如果为幻灯片、相册等，将当前展示图片的前一张和后一张优先下载。
+
+          c. 使用CSSsprite，SVGsprite，Iconfont、Base64等技术，如果图片为css图片的话。
+
+          d. 如果图片过大，可以使用特殊编码的图片，加载时会先加载一张压缩的特别厉害的缩略图，以提高用户体验。 -->
+</body>
+
+</html>
