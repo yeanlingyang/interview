@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  let obj={
+    name : 'wz',
+    age : 18,
+    // 我想扩大我的属性和方法就需要通过继承的方式（通过混入式继承来添加属性和方法） 
+    // 你给我一个对象, 我就可以将对象中的所有属性和方法, 添加到自己身上
+    extend: function(obj) {
+      for (var k in obj) {
+        this[ k ] = obj[ k ];
+      }
+    }
+  }
+  let obj1= {
+    money : 10000,
+    car : 'Cayenne',
+    knockCode(){
+      console.log('我会敲代码');
+    }
+  }
+  // 通过调用Obj的extend方法就实现了将obj1的属性和方法添加到了obj对象身上
+  obj.extend(obj1) 
+  console.log(obj);
+  
+  
+  </script>
+</body>
+</html>

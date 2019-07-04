@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<div></div>
+
+<body>
+
+  <script>
+
+
+    //     console的各种用法
+    //     1、输出信息
+    //     console.log('消息内容！'); //输出普通信息
+    // 　　console.info('消息内容！'); //输出提示信息 (在ie上有区分)
+    // 　　console.error('消息内容！');//输出错误信息
+    // 　　console.warn('消息内容！'); //输出警告信息
+
+    //     2、数据表格化
+    //     var thisObj = [
+    // 　　　　{ name: 'quber', email: 'qubernet@163.com', qq: 757200834 },
+    // 　　　　{ name: 'xm', email: 'xm@126.com', qq: 757200833 },
+    // 　　　　{ name: 'jack', email: 'jack@sina.com', qq: 757200832 },
+    // 　　　　{ name: 'maer', email: 'maer@gmail.com', qq: 757200831 }
+    // 　　];
+    //    let thisObj = {name:'zs',age:16,say(){console.log('hello');}}
+    // 　　console.table(thisObj);
+
+    //     3、统计代码执行时间
+    // 　　console.time('统计时间');
+    // 　　var count = 0;
+    // 　　for (var i = 0; i < 9999; i++) {
+    // 　　　　count++;
+    // 　　}
+    // 　　console.timeEnd('统计时间');
+
+    //    4、分组输出信息
+    // 　　console.group('分组1');
+    // 　　console.log('分组1-1111');
+    // 　　console.log('分组1-2222');
+    // 　　console.log('分组1-3333');
+    // 　　console.groupEnd();
+    // 　  console.group('分组2');
+    // 　　console.log('分组2-1111');
+    // 　　console.log('分组2-2222');
+    // 　　console.log('分组2-3333');
+    // 　　console.groupEnd();
+
+    //     5、统计代码执行的次数
+    // 　　function testFn() {
+    // 　　　　console.count('当前执行的次数');
+    // 　　}
+    // 　　testFn();
+    // 　　testFn();
+    // 　　testFn();
+    //    for (i = 0; i < 10; i++) {
+    //      console.count('次数');
+    //    }
+
+    //    6、当表达式为false时，输出信息
+    // 　　var testObj = false;
+    // 　　console.assert(testObj, '当testObj为false时才输出！');
+
+    //    7、用来追踪函数的调用轨迹。
+    //    var x = add3(1, 1);
+    //    function add3(a, b) { return add2(a, b); }
+    //    function add2(a, b) { return add1(a, b); }
+    //    function add1(a, b) { return add(a, b); }
+    //    function add(a, b) {
+    //      console.trace(); //运行后，会显示add()的调用轨迹
+    //      return a + b;
+    //    }
+
+
+
+    // CSS中 link 和 @import 的区别是？
+    // <link rel="stylesheet" href="xxx.css">
+    // <style type="text/css">@import url('xxx.css');</style>
+    // (1) link属于HTML标签，而@import是CSS提供的;
+    // (2) 页面被加载的时，link会同时被加载，而@import等到引用它的CSS文件被加载完再加载;
+    // (3) import只在IE5以上才能识别，而link是HTML标签，无兼容问题;
+    // (4) link方式的样式的权重 高于@import的权重.
+
+
+
+
+  </script>
+</body>
+
+</html>

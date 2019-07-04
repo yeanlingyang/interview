@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    /* new关键字做的四件事
+      1.创建一个对象，并指定具体的类型
+      2.将构造函数中的this，指向这个新对象
+      3.执行构造函数
+      4.将这个新对象返回 */
+
+
+    function Person(name, age, obj) {
+      this.name = name;
+      this.age = age;
+      this.obj = obj;
+      this.sayName = function () {
+        console.log(this.name);
+      }
+    }
+
+    var New = function (p) {
+      // 创建一个新对象
+      var newObj = {};
+      // 指定参数p为一个构造函数
+      p.prototype.constructor = p;
+      // 调用数组的slice方法，获取构造函数执行时的参数，
+      // 第0项是构造函数自己，从第0项开始往后所有的参数
+      var arg = Array.prototype.slice.call(arguments,1);
+      // 并将新对象的原型指向构造函数的原型
+      newObj.__proto__ = p.prototype;
+      // 将构造函数中的this，指向这个新对象,并执行构造函数
+      p.apply(newObj, arg);
+      // 将这个新对象返回
+      return newObj;
+    }
+
+    var p1 = New (Person,'pp', 20, 'tea');       
+    var p2 = New (Person,'junjun', 18, 'stu');
+
+    console.log(p1);
+    console.log(p2);
+
+    console.log(p1.__proto__ === p2.__proto__);
+    console.log(p1.__proto__ === Person.prototype);
+    // 实例对象的类型
+    console.log(p1.constructor.name);
+
+  </script>
+
+</body>
+
+</html>

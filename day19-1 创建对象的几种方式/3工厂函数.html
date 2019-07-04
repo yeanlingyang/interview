@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    // 需求：批量创建对象,将来网站用户, 不可能只有一个, 就需要批量创建对象
+
+
+    // 创建一个对象 (内置构造函数)
+    var xm = new Object({
+      name: '小明',
+      age: 22,
+      gender: '男',
+      say: function () {
+        // 在对象的方法中, this 指代当前对象
+        console.log('大家好, 我是' + this.name);
+      },
+      eat: function () {
+        console.log('会吃饭');
+      }
+    })
+    console.log(xm);
+    xm.say();
+
+
+    // 再创建一个小红对象
+    var xh = new Object({
+      name: '小红',
+      age: 20,
+      gender: '女',
+      say: function () {
+        // 在对象的方法中, this 指代当前对象
+        console.log('大家好, 我是' + this.name);
+      },
+      eat: function () {
+        console.log('会吃饭');
+      }
+    });
+
+    console.log(xh);
+    xh.say();
+
+
+    // 函数: 将一段的代码进行封装, 一次声明可以多次调用
+    // 批量创建对象: 可以将创建对象的代码封装在一个函数中, 这个函数就叫工厂函数
+
+    function createPerson(name, age, gender) {
+      var obj = new Object({
+        name: name,
+        age: age,
+        gender: gender,
+        say: function () {
+          // 在对象的方法中, this 指代当前对象
+          console.log('大家好, 我是' + this.name);
+        },
+        eat: function () {
+          console.log('会吃饭');
+        }
+      })
+      return obj;
+    }
+
+    var xh = createPerson('小红', 18, '女');
+    console.log(xh);
+
+    var xm = createPerson('小明', 24, '男');
+    console.log(xm);
+
+    var xz = createPerson('小张', 80, '男');
+    console.log(xz);
+
+
+  // 以上的对象, 虽然封装了, 但还是通过 字面量的方式创建的, 所以类型 还是 Object
+  // 通过工厂函数创建的对象, 没有具体的类型的, 都是 Object 
+
+
+
+
+  </script>
+
+</body>
+
+</html>

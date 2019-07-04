@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 经典式继承
+  var wz = {
+    car: 'Cayenne',
+    money: "100W"
+  };
+  var zz = Object.create(wz);  //作用: 可以创建一个空对象, 且指定这个对象的原型就是 obj    
+   // 其实底层实现分成了两步:
+   // (1) var newObj = new Object();  // 先创建了一个新的空对象
+   // (2) newObj.__proto__ = wz;      // 让新创建出来的对象, 将原型指向指定的对象
+   // 任何对象的老祖宗, 都是 Object.prototype
+   // 打印
+   console.log(zz);
+  </script>
+</body>
+</html>

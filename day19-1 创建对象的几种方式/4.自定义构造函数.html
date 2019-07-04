@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+
+    /* 需求：(1)批量创建对象   (2)创建出来的对象，具有自己的类型  
+  
+       问题：什么是构造函数？
+       1. 就是一个函数
+       2. 首字母大写
+       3. 在js中, 内置了一些构造函数, 比如: Object  Array Number String Boolean
+       4. 构造函数可以自定义=>你想要什么样的构造函数,就可以有什么样的构造函数
+       
+       构造函数创建对象的步骤:
+       1. 自己声明一个构造函数 (初始化对象，给实例对象添加属性和方法)
+       2. 结合 new 一起使用, 创建一个有具体类型的对象
+          (1) 创建一个对象，并指定它的类型
+          (2) 让构造函数中的this，指向这个对象
+          (3) 执行构造函数
+          (4) 将对象返回
+   */
+
+
+    // 创建不同类型的对象
+    function Dog() {
+    }
+    var dog1 = new Dog();
+    var dog2 = new Dog();
+    console.log(dog);      // Dog
+
+
+    function Cat() {
+    }
+    var cat1 = new Cat();
+    var cat2 = new Cat();
+    console.log(cat);     // Cat
+
+
+    /* 
+    混淆  工厂函数常创建对象 / 自定义构造函数创建对象
+    工厂函数：
+     (1) 只是将创建对象的代码段击行封装复用，一次声明，多次调用
+     (2) 不需要结合new一起使用
+    自定义构造函数：
+     (1) 只用于初始化对象，给实例对象添加属性和方法
+     (2) 必须结合new一起使用
+     */
+
+
+
+    //  1.自定义构造函数,并初始化对象
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+      this.sayHi = function () {
+        console.log('hello,girl');
+      }
+    }
+    // 2.结合new,创建对象
+    var p1 = new Person('zs', 16);
+    var p2 = new Person('zf', 12);
+    console.log(p1, p2);
+    p1.sayHi();
+    p2.sayHi();
+
+
+
+    // 1.创建一个空的自定义构造函数
+    function Person() {
+    };
+
+    // 2.结合new实例化一个对象
+    var p3 = new Person('zs', 16);
+    // 3.给实例对象添加属性和方法
+    p3.name = 'ls';
+    p3.age = 18;
+    p3.sayHi = function () {
+      console.log('hello,girl');
+    }
+    console.log(p3);
+
+
+
+
+  // 如果直接在构造函数中, 给每一个新创建的对象, 都添加方法,会导致内存浪费
+  // 函数的作用是一样的, 但是多个相同的函数, 却占用了很多个内存
+
+  </script>
+
+</body>
+
+</html>

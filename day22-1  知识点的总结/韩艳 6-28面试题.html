@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>韩艳6-28 面试题</title>
+</head>
+
+<body>
+
+  <script>
+
+    // 1 var: var声明的变量会提升 
+    //   let: let声明的变量不存在提升; 必须先定义后使用; 变量不能重名;当使用 let 或 const 修饰的变量在初始化之前会形成封闭作用域 --暂时性死区
+    // 问:下面代码输出啥?
+    // function sayHi() {
+    //   console.log(name);
+    //   console.log(age);
+    //   var name = "Lydia";
+    //   let age = 21;
+    // }
+    // sayHi();
+
+
+    // 2 var: var声明的变量是全局作用域或者函数作用域
+    //   let: let声明的变量只有在当前作用域有效 let变量有块级作用域;
+    // 问:下面代码输出啥?
+    for (var i = 0; i < 3; i++) {
+      setTimeout(() => console.log(i), 1);
+    } //一直打印3
+
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => console.log(i), 1);
+    } //打印0-3 
+    /*详解 由于JavaScript中的事件执行机制，setTimeout函数真正被执行时，循环已经走完。
+      由于第一个循环中的变量i是使用var关键字声明的，该值非函数作用域中声明 所以是全局的。
+      在循环期间，我们每次使用一元运算符++都会将i的值增加1。
+      因此在第一个例子中，当调用setTimeout函数时，i已经被赋值为3。
+
+      在第二个循环中，使用let关键字声明变量i：
+      使用let（和const）关键字声明的变量是具有块作用域的（块是{ } 之间的任何东西）。
+      在每次迭代期间，i将被创建为一个新值，并且每个值都会存在于循环内的块级作用域*/
+
+
+
+    // 3 对象的方法简写  省略了:function
+    //  箭头函数简写: 如果只有一个参数 可以省略(),如果没有参数 就写个();如果只有一行代码 就省去return 和 {}
+    //  箭头函数中没有this  this到外面找
+    //问 下面代码输出啥 ?
+    const shape = {
+      radius: 10,
+      diameter() {
+        return this.radius * 2;
+      },
+      perimeter: () => 2 * Math.PI * this.radius
+    };
+
+    console.log(shape.diameter()); //20
+    console.log(shape.perimeter()); //NaN
+
+
+    // 4  其他类型转数字==>(1)Number()  (2)取正+  (3)parseInt()或者parseFloat()
+    //    转布尔类型是false有哪几种?
+    //问 下面代码输出啥 ?
+    // console.log(+true);
+    // console.log(!"Lydia");
+
+
+    // 5 简单数据类型传递的是值的副本    你改了  不影响我的
+    //  复杂数据类型传递的是地址        你改了  我的也被影响了
+    //问 下面代码输出啥 ?
+    // let c = { say: "你好啊!" };
+    // let d;
+
+    // d = c;
+    // c.say = "我不好啊!";
+    // console.log(d.say);
+
+
+    // 6 new Number()==>数字对象 包装类型
+    //   ===是值和类型都要比较  ==是值的比较
+    //问 下面代码输出啥 ?
+    // let a = 3;
+    // let b = new Number(3);
+    // let c = 3;
+    // console.log(b);
+
+    // console.log(a == b);
+    // console.log(a === b);
+    // console.log(b === c);
+
+    // 7 所有对象都有原型吗?
+
+
+    // 8  ...展开运算符
+    //   字符串可以遍历吗?
+    //问 下面代码输出啥 ?
+    // console.log([..."Lydia"]);
+
+
+    // 9 转布尔类型:  (1)Boolean  (2)!!
+    // 问 下面代码输出啥
+    // console.log(!!null);
+    // console.log(!!"");
+    // console.log(!!1);
+
+
+
+    // 10 下面代码输出啥
+    // function sayHi() {
+    //   return (() => 0)();
+    // }
+
+    // console.log(typeof typeof sayHi());
+
+    // 11 call和bind的区别?
+    // 问 下面代码输出啥
+    // const person = { name: "Lydia" };
+
+    // function sayHi(age) {
+    //   console.log(`${this.name} is ${age}`);
+    // }
+
+    // sayHi.call(person, 21);
+    // sayHi.bind(person, 21);
+
+
+
+    // 12 js中 事件 定时器 ajax是异步的,定时器里面的代码会丢给浏览器去监听 符合执行条件后再丢到执行队列中等待
+    // 问 下面代码输出啥
+    // const foo = () => console.log("First");
+    // const bar = () => setTimeout(() => console.log("Second"));
+    // const baz = () => console.log("Third");
+
+    // bar();
+    // foo();
+    // baz();
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

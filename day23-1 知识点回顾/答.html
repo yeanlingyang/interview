@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- 
+   一: 行内元素和块级元素
+
+    行内元素:a b span img input select strong label cite code 
+
+    块级元素:div ul ol table h系列  p
+
+    两者之间的区别:
+      1)块级元素会独占一行,其宽度自动填满其父元素宽度
+        行内元素不会独占一行，相邻的行内元素会排列在同一行里，直到一行排不下，才会换行，其宽度随元素的内容的宽度变化而变化
+
+      2)块级元素可以设置 width, height属性，行内元素设置width,  height无效
+         【注意：块级元素即使设置了宽度，仍然是独占一行的】
+
+      3) 块级元素可以设置margin 和 padding.  行内元素的水平方向的padding-left,padding-right,margin-left,margin-right 都产生边距效果，但是竖直方向的padding-top,padding-bottom,margin-top,margin-bottom都不会产生边距效果
+
+  -->
+
+
+  <!-- 
+
+    二:事件委托 bind 和 on 的区别
+
+      事件委托:就是想给子元素添加事件反而添加到父元素的身上
+        经常适用:
+          1: 考虑一个ul，在li的数量非常少的时候，为每一个li添加事件当然不会存在太多性能方面的问题，但是当列表非常的长for循环太浪费内存，长到上百上千甚至上万的时候，为每个li添加事件就会对页面性能产生很大的影响。（习惯用ul了，其他元素嵌套关系自行脑补）
+
+          2: 有些p元素, 并不是页面中直接存在的, 而是动态创建的一开始这些p元素, 还没创建出来, 所以事件无法直接绑定上,此时就需要用事件委托了
+
+      事件委托的注意点:
+          1:给父辈或祖辈绑定(就近)
+          2:this指向当前点击的元素
+
+      bind(事件名, 事件处理函数)
+        (1) 可以给 h5 新增的事件, 绑定
+        (2) 可以同时绑定多个事件
+        (3)适用于页面元素静态绑定。只能给调用它的时候已经存在的元素绑定事件，不能给未来新增的元素绑定事件。
+        (4)当页面加载完的时候，你才可以进行bind()，所以可能产生效率问题。
+
+      on:将监听事件绑定到指定元素上。
+        继jQuery1.7之后，on()方法替代了bind(), live() 和 delegate() 方法。on()方法可以给当前元素和未来元素绑定事件。用off()方法解除事件的绑定，如果绑定的事件只执行一次，则用one()方法。
+
+
+      三:节点操作：
+  获取节点
+		    dom：文档对象模型（dom树）
+		    dom树的好处：方便找亲戚
+		
+        childNodes：获许元素所有的子节点（文本节点、注释节点、换行节点）
+        firstchild：获许元素的第一个子节点
+        lastchild：获取元素的最后一个子节点
+		    children：获许元素所有的子元素
+		    firstElementChild：获许元素的第一个子元素====children[0]
+		    lastElementChild：获取元素的最后一个子元素=====children[ul.children.length]
+
+        获取元素的上一个兄弟节点previousSibling
+        获取元素的下一个兄弟节点nextSibling
+		    获取元素的上一个兄弟元素：previousElementSibling
+		    获取元素的下一个兄弟元素nextElementSibling
+		
+        找父节点（元素） parentNode
+
+  添加节点：
+      法一：appendChild：把子节点添加到父节点内部的最后面
+      	parent：有父元素来调用该方法
+      	参数：newChild；添加的子节点
+      		语法：parent.appendChild（newChild）
+       
+      	对于页面中本来就存在的元素，添加节点是一个剪贴的效果，原来的就不在了。
+      
+      法二：insertBefore：可以添加子节点到任何指定的位置
+      	语法：parent.insertBefore(newChild, refChild);
+      	parent：由父元素调用
+      	参数：newChild添加谁
+      		refChild在谁前面
+      		这两个参数必须写上，否则会报错
+      		第二个参数如果写null、undefined、insertBefore（）方法的效果等同于appendChild
+      	Exp:   parent .insertBefore(newChild,refChild);
+      
+      共同点：
+      于页面中本来就有的元素，等于剪切的效果
+
+
+  克隆节点：
+    		语法：var newNode = node.cloneNode(deep)
+    		作用：在内存中克隆一份节点
+    		node：需要克隆的节点
+    		参数：deep；参数的值是个布尔类型
+    		true；深拷贝，会克隆标签以及里面的内容
+    		false：浅拷贝：只会拷贝标签自身
+    		返回值：克隆出来的节点
+    		Node.cloneNode(deep)
+    		如果克隆出来的元素里有id，不能让id重名，所以需要对克隆出来的节点修改id
+        克隆出来的节点和原来的节点之间的修改是互不影响的
+
+
+  删除节点：
+    	点谁删除谁：
+      parent.removeChild（child）
+      参数:child就是需要删除的节点
+    	exp：this.parentNode.removeChild(……)
+    	display:none;仅仅是隐藏了元素，dom树上还在
+      removeChild：从dom树上干掉了
+
+  创建节点：
+      法一：document.write（“string”）-------基本不用
+      如果页面已经加载完成了，你还是用document.write写内容的话，会把之前的页面给覆盖掉
+      	缺点：存在覆盖问题，而且只能在document上创建内容
+
+      法二：innerHTML
+      	缺点：存在安全问题，慎用，会造成性能问题
+      		会有覆盖问题
+      		不要在for循环里面使用innerHTML，这样会造成性能低下
+      		在循环的外面
+      法三：
+      	语法：var element = document.createElement("tagName");
+      	document.createElement（TagName）
+      	作用：在内存上创建节点
+      	参数：字符串类型的标签名
+      	创建出来的节点是在内存中，需要添加到页面中才可以看到
+        cument.Body.appendChild（button）
+
+
+
+</body>
+
+</html>

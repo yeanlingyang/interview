@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+  //混入式继承和原型式继承 
+  //就是直接在原型对象(Person.prototype)上添加一个方法 
+  //这个方法 就是 通过遍历对象方式 然把 传入的对象的属性和方法 添加到原型对象(Person.prototype)中,
+  //将来创建的实例都可以访问原型对象的方法
+
+  // 混入式继承+原型式继承 好处:
+  // 可以不用更换原型
+  // 直接利用extend方法, 给自己的原型扩展属性和方法即可
+     
+    
+
+  function Person(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  // 这个方法, 调用时, 可以将其他的对象的属性和方法添加到自己身上
+  Person.prototype.extend = function(obj) {
+    for (var k in obj) {
+      this[k] = obj[k];
+    }
+  };
+  var wz = {
+    money: "100w",
+    car: 'Cayenne'
+  };
+
+  var wzSing = {
+    sing: function() {
+      console.log('唱歌');
+    }
+  };
+  //直接在原型对象中添加属性和方法
+  Person.prototype.extend(wz);  // 将wzSing里面的所有属性, 混入添加到 Person.protoype 原型中
+
+  Person.prototype.extend(wzSing); // 将wzSing里面的所有方法, 混入添加到 Person.protoype 原型中
+
+  var p = new Person('zz', 18);
+  //然后新创建的实例 就可以访问wz对象属性和wzSing对象的方法
+  console.log(p);
+  console.log(p.car);
+  p.sing();
+
+    
+  </script>
+</body>
+</html>

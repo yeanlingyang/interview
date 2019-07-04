@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  //1.原型的特性是啥？ 
+  //  将来所有创建的对象, 都可以访问原型上方法 
+  //2.属性访问原则？
+  //  如果自己有这个属性, 就访问自己的
+  //  如果自己没有这个属性, 会到原型中找, 如果找到, 不找了, 直接返回
+  //  如果原型中也没有, 会到原型的原型中找....
+  //  一直找到 Object.prototype, 如果老祖宗也没有, 返回 undefined
+
+
+  // 原型式继承(也叫原型链继承), 就是利用原型的特性, 以及属性访问原则实现的继承
+  // 1. 直接给原型, 添加属性和方法, 将来所有的实例, 都可以访问到
+  // 2. 原型替换, 也就是换爹,  创建的实例.__proto__ = 换的爹, 但是这样不推荐！
+
+ 
+    
+// 直接给原型添加属性方法
+  Object.prototype.money = "1W";
+  var obj = {
+    name: 'wz',
+    age: 18
+  };
+  console.log(obj.money);
+
+
+
+  var obj1 = {
+    money: "100W",
+    car: 'Cayenne'
+  }
+  
+ // 原型替换将obj的原型对象换成obj1 然后obj可以访问  但是这样不推荐
+  obj.__proto__ = obj1;
+  console.log(obj.car);
+
+  
+    
+    
+ </script>
+</body>
+</html>

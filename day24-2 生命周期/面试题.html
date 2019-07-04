@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+
+    // 1.MVVM框架
+    // 一个model+view+viewModel框架，M是数据模型model，V是视图view，viewModel连接数据模型和视图
+    // 以数据驱动，当数据发生变化时，视图就会跟着改变
+    // DOMListeners和DataBindings是实现双向绑定的关键
+    // View--->DOMListeners 和 DataBindings ---->Model
+    // 利用ObjectdefineProperty定义的set和get函数数据劫持
+
+    // 2.vue.js的两个核心是什么？
+    // 答：数据驱动、组件系统
+    
+    // 3.v-if 和 v-show 区别
+    // 答：v-if按照条件是否渲染，是DOM元素的添加和删除,
+    // v-show是display的block或none；
+    
+    // 4.vue中 key 值的作用？
+    // 答：当 Vue.js 用 v-for 正在更新已渲染过的元素列表时，它默认用“就地复用”策略。
+    // 如果数据项的顺序被改变，Vue 将不会移动DOM元素来匹配数据项的顺序，
+    // 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。
+    // key的作用主要是为了高效的更新虚拟DOM.
+    
+    // 5.vue的生命周期
+    //  (1)什么是vue生命周期: 
+    //   Vue 实例从创建到销毁的过程，就是生命周期。
+    //  也就是从开始创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程，
+    //  我们称这是 Vue 的生命周期。
+
+    //  (2)vue生命周期的作用:
+    //   它的生命周期中有多个事件钩子，让我们在控制整个Vue实例的过程时更容易形成好的逻辑。
+    
+    //  (3)vue生命周期总共有几个阶段: 
+    //   总共分为8个阶段：创建前/后, 载入前/后,更新前/后,销毁前/销毁后。
+    
+    //  (4)第一次页面加载会触发哪几个钩子: 
+    //   第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这几个钩子。
+    
+    //  (5)DOM 渲染在哪个周期中就已经完成: 
+    //   DOM 渲染在 mounted 中就已经完成了。
+    
+    //   总共分为8个阶段：
+    
+    //   beforeCreate----创建前 
+    //   组件实例更被创建，组件属性计算之前，数据对象data都为undefined，未初始化。 
+    //   created----创建后 
+    //   组件实例创建完成，属性已经绑定，数据对象data已存在，但dom未生成，$el未存在 
+    
+    //   beforeMount---挂载前 
+    //   vue实例的$el和data都已初始化，挂载之前为虚拟的dom节点，data.message未替换 
+    //   mounted-----挂载后 
+    //   vue实例挂载完成，data.message成功渲染。 
+    
+    //   beforeUpdate----更新前 
+    //   当data变化时，会触发beforeUpdate方法 
+    //   updated----更新后 
+    //   当data变化时，会触发updated方法 
+    
+    //   beforeDestory---销毁前 
+    //   组件销毁之前调用 
+    //   destoryed---销毁后 
+    //   组件销毁之后调用，对data的改变不会再触发周期函数，vue实例已解除事件监听和dom绑定，但dom结构依然存在 
+
+    //   6.什么是vue的计算属性？
+    
+    //   答：在模板中放入太多的逻辑会让模板过重且难以维护，在需要对数据进行复杂处理，
+    //   且可能多次使用的情况下，尽量采取计算属性的方式。好处：
+    //   1. 使得数据处理结构清晰；
+    //   2. 依赖于数据，数据更新，处理结果自动更新；
+    //   3. 计算属性内部this指向vm实例；
+    //   4. 在template调用时，直接写计算属性名即可；
+    //   5. 相较于methods，不管依赖的数据变不变，methods都会重新计算，
+    //    但是依赖数据不变的时候computed从缓存中获取，不会重新计算
+    
+    //   7.组件之间的传值通信？
+    
+    //   父组件向子组件传值：
+    //   1）子组件在props中创建一个属性，用来接收父组件传过来的值；
+    //   2）在父组件中注册子组件；
+    //   3）在子组件标签中添加子组件props中创建的属性；
+    //   4）把需要传给子组件的值赋给该属性
+    
+    //   子组件向父组件传值：
+    //   1）子组件中需要以某种方式（如点击事件）的方法来触发一个自定义的事件；
+    //   2）将需要传的值作为$emit的第二个参数，该值将作为实参传给响应事件的方法；     
+    //   3）在父组件中注册子组件并在子组件标签上绑定自定义事件的监听。
+
+  </script>
+</body>
+</html>

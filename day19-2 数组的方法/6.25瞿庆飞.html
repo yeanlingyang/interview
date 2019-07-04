@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    
+//Math.trunc() 方法用于去除一个数的小数部分，返回整数部分。
+ // trunc 取整；
+
+// console.log(Math.trunc(4.1) );
+// console.log(Math.trunc(4.9) );
+// console.log(Math.trunc(-4.1) );
+// console.log(Math.trunc(-4.9) );
+// console.log(Math.trunc(-0.1234) );
+// console.log(Math.trunc(0.1234) );
+
+
+//对于非数值，Math.trunc内部使用Number方法将其先转为数值。
+
+// console.log(Math.trunc('123.456')); 
+// console.log(Math.trunc(true) );
+// console.log(Math.trunc(false));
+// console.log(Math.trunc(null));
+ 
+//对于空值和无法截取整数的值，返回NaN。
+
+// console.log(Math.trunc(NaN)); 
+// console.log(Math.trunc('foo')); 
+// console.log(Math.trunc());
+// console.log(Math.trunc(undefined));
+
+
+
+
+
+// 2.Array.from()
+// Array.from方法用于将伪数组转为真正的数组 
+
+// 下面是一个类似数组的对象，Array.from将它转为真正的数组。
+
+// let arrayLike = {
+//     '0': 'a',
+//     '1': 'b',
+//     '2': 'c',
+//     length: 3
+// };
+
+// // ES5的写法
+// var arr1 = [].slice.call(arrayLike); 
+
+// console.log(arr1);
+
+// // ES6的写法
+// let arr2 = Array.from(arrayLike); 
+//  console.log(arr2);
+
+
+
+
+
+
+// 3 数组fill方法 
+
+// fill方法用于空数组的初始化非常方便。直传第一个参数，数组中已有的元素，会被全部抹去
+// arr.fill(参数1，参数2，参数3)
+// 还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置（不包括结束位置）。
+
+// let arr=[1, 2, 3];
+
+// arr.fill(7)
+
+// console.log(arr);
+
+// arr.fill(7, 1, 2)
+
+// console.log(arr);
+
+
+// arr.splice(1,1,7)
+
+// console.log(arr);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>深拷贝与浅拷贝</title>
+
+</head>
+
+<body>
+  <!-- 提问：深拷贝与浅拷贝的区别？？？？ -->
+
+
+  <script src="./jquery-3.4.1.min.js"></script>
+  <script>
+    // javaScritp的数据类型：
+    // 简单数据类型（基本数据类型）：number、string、boolean、null、undefined 以及es6中新增的Symbol类型
+    // 复杂数据类型（引用类型）：Object、Array 、Function
+
+
+    // let a = { age: 1 }
+    // let b = a
+    // a.age = 2
+    // console.log(b.age)
+    //如果给一个变量赋值一个对象，两者的值会是同一个引用，其中一方发生改变，另一方也会响应改变，这是不希望发生的，所以使用浅拷贝来解决这个问题
+
+
+    //浅拷贝方法1
+    //Object.assign,用来将源对象的所有属性，复制到目标对象。
+    //Object.assign(target,source1,source2...)
+    // let a = {
+    //   age: 1,
+    //   name: 'cyy'
+    // }
+    // let b = Object.assign({}, a)
+    // a.age = 2
+    // console.log(b.age) 
+    // console.log(b.name) 
+
+
+    //浅拷贝方法2
+    //...拓展运算符用于取出对象或者数组中的所有可遍历属性，拷贝到当前对象中
+    // let a = {
+    //   age: 1,
+    //   sex: '男'
+    // }
+    // let b = { ...a }
+    // console.log(b);
+    // a.age = 2
+    // a.sex = '女'
+    // console.log(a===b);
+
+
+
+
+
+
+
+    // 浅拷贝只解决了第一层(简单数据类型)的问题，如果接下去的值中还有对象的话，要解决这个问题，我们需要引入深拷贝
+    // let a = {
+    //   age: 1,
+    //   jobs: { first: 'FE' }
+    // }
+    // let b = { ...a }
+    // a.jobs.first = 'native'
+    // console.log(b.jobs.first) 
+
+
+
+
+
+
+
+    //深拷贝方法1
+    //JSON.parse(JSON.stringify(obj))
+    //利用JSON.stringify将js对象序列化（JSON字符串），再使用JSON.parse来反序列化(还原)js对象；
+    //let a = {
+    //   age: 1,
+    //   jobs: { first: 'FE' },
+    // }
+    // let b = JSON.parse(JSON.stringify(a))
+    // a.jobs.first = 'native'
+    // console.log(b.jobs.first) 
+
+    // 但是这种方法有局限性
+    // 1.会忽略 undefined
+    // 2.不能序列化函数
+    // 3.不能解决循环引用的对象
+
+
+    // 遇到函数或者undefined的时候，该对象不能正常的序列化
+    // let a = {
+    //   age: undefined,
+    //   jobs: function () { },
+    //   name: 'yck'
+    // }
+    // let b = JSON.parse(JSON.stringify(a))
+    // console.log(b) // {name: "yck"}
+
+
+    //深拷贝方法2  jquery中的extend方法
+    // jQuery.extend([deep], target, object)
+    // let obj1 = {
+    //   a: 1,
+    //   b: { f: { g: 1 } },
+    //   c: [1, 2, 3]
+    // };
+    // let obj2 = $.extend(true, {}, obj1);
+    // obj1.b.f = { x: 2 };
+    // console.log(obj1.b.f);
+    // console.log(obj2.b.f);
+    // console.log(obj1.b.f === obj2.b.f);
+
+   
+
+  </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 创建方式(不能用new创建)：
+    // 1.  let  sy=Symbol();      
+    // 2.  Symbol('name')
+
+    // Symbol的两个作用：
+    // 合并的时候可以放置变量，冲突无覆盖；
+    // 作为对象的内部变量，去进行计算或使用；
+
+
+    // Symbol类型的对象永远不相等，即便创建它们的时候传入了相同的值。
+    // 因此，可借助此特性解决属性名的冲突问题（比如适用于多人编码的时候），这也是该symbol类型存在的主要用途，意为标记
+
+
+    console.log(typeof(Symbol()));
+    console.log(Symbol('key') === Symbol('key'));
+  </script>
+</body>
+
+</html>

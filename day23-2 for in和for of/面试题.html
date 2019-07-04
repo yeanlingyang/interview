@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    /* 
+    for...of  与   for...in
+    1- 遍历数组时推荐使用for...of，其中item为数组每一项的值。使用for...in则不能保证遍历顺序且会遍历出自定义属性。
+
+    2- 遍历对象时推荐使用for...in，其中item为对象的key。使用for...of会报错。
+    
+    */
+
+    // for...of  与   for...in 遍历数组的时候
+
+    var arr = ['nick', 'freddy', 'mike', 'james'];
+    for (var key in arr) {
+      console.log(key);
+    }
+
+    console.log('-----------分割线-----------');
+
+    for (var item of arr) {
+      console.log(item);
+    }
+
+    // 0
+    // 1
+    // 2
+    // 3
+    // -----------分割线-----------
+    // nick
+    // freddy
+    // mike
+    // james
+
+    // 不难看出，for in循环遍历的是数组的键值(索引)，而for of循环遍历的是数组的值。
+
+
+    // Object.prototype.objCustom = function () { };
+    // Array.prototype.arrCustom = function () { };
+    // arr.name = 'aa'
+    // for (var key in arr) {
+    //   console.log(key);
+    // //  console.log(arr[key]);
+    // }
+    // 0      nick
+    // 1      freddy
+    // 2      mike
+    // 3      james
+    // name   aa
+    // arrCustom
+    // ƒ () {}
+    // objCustom
+    // ƒ () {}
+
+    // console.log('-----------分割线-----------');
+
+    // for (var item of arr) {
+    //   console.log(item);
+    // }
+
+    // nick
+    // freddy
+    // mike
+    // james
+
+    // 给数组添加一个自定义属性name 在给数组的原型对象添加俩个属性
+    // 然后进行遍历输出的，会发现新定义的属性和原型上的属性也被for in输出了，
+    // 而for of并不会对name和原型上的属性进行输出。
+
+    // 不想让for in输出原型上的属性可以用 hasOwnProperty
+    // hasOwnProperty表示是否有自己的属性。这个方法会查找一个对象是否有某个属性，但是不会去查找它的原型链。
+    // for (var key in arr) {
+    //   if (arr.hasOwnProperty(key)) {
+    //     console.log(key);
+    //     console.log(arr[key]);
+    //   }
+    // }
+
+    // 0      nick
+    // 1      freddy
+    // 2      mike
+    // 3      james
+    // name   aa
+
+
+    // 不想让for in 输出自定义属性可以用forEach
+    // arr.forEach(function (value, key) {
+    //   console.log(key);
+    //   console.log(arr[key]);
+    // });
+
+    // 0      nick
+    // 1      freddy
+    // 2      mike
+    // 3      james
+
+
+    // for...of循环不会循环对象的key，只会循环出数组的value，
+    // 因此for...of不能循环遍历普通对象,对普通对象的属性遍历推荐使用for...in
+    // 所以for in更适合遍历对象，不推荐使用for in遍历数组。
+
+    // for...of  for...in 遍历数组的时候有些情况要拿遍历出的属性参与运算
+
+    // let a = ["q", "w", "e"];
+    // for (let item in a) {
+    //   console.log(item + "   " + typeof item)
+    // }
+    //0   string
+    //1   string
+    //2   string
+
+    // let b = ["q", "w", "e"];
+    // for (let item of b.keys()) {
+    //   console.log(item + "   " + typeof item)
+    // }
+    //0   number
+    //1   number
+    //2   number
+
+  // 数组的键名是数字，但是for…in循环是以字符串作为键名
+  // 在数组遍历中，for…in循环会遍历非数字索引的属性，而for…of循环不会
+
+
+
+    // for...of  与   for...in 遍历对象的时候
+
+    // 遍历对象
+    // let obj = {
+    //   a: 1,
+    //   b: 2,
+    //   c: 3
+    // };
+    // for (let item in obj) {
+    //   console.log("item:" + item);
+    //   console.log(obj[item]);
+    // }
+
+    // item:a
+    //  1
+    // item:b
+    //  2
+    // item:c
+    //  3
+
+
+    // for (let item of obj) {
+    //   console.log("item:" + item);
+    //   console.log(obj[item]);
+    // }
+    // 报错
+
+
+    // 如果想使用for…of遍历得到对象的键名和键值，可以有以下两种方法，核心思想都是先转化为数组，然后使用for…of遍历。
+
+
+
+    // ES6学过的方法有那些
+
+    // ES6的一些方法:
+    // 1- let const 
+
+    // 2- 箭头函数
+
+    // 3- 解构赋值
+
+    // 4- 字符串模板
+
+    // 5- 数组的几个方法  find  findIndex 
+
+    // 6- 展开运算符... 和set
+
+
+  </script>
+</body>
+
+</html>

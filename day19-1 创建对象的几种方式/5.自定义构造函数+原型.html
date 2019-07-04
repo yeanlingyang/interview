@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    /* 
+    需求: 
+    1.批量创建对象 
+    2.创建出来的对象,都具有自己的数据类型
+    3.解决内存浪费的问题    */
+       
+
+    // 构造函数：添加私有属性
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    // 原型：添加共享属性/实现继承
+    Person.prototype.money = 1000000;
+    Person.prototype.car = {
+      brand: '玛莎拉蒂',
+      price: 1000000
+    };
+    Person.prototype.sayHi = function () {
+      console.log('你好, 哈哈哈');
+    };
+
+    // 批量实例化对象
+    var p1 = new Person('zs', 16);
+    var p2 = new Person('zf', 12);
+
+
+    console.log(p1.car);
+    console.log(p2.car);
+    console.log(p1.car === p2.car);      //true
+    p1.sayHi();
+    p2.sayHi();
+    console.log(p1.sayHi === p2.sayHi);  //true
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    /* 
+    问题： 实例对象的数据类型，由谁指定？如何指定？
+    实例对象创建过程中，new根据构造函数，指定了实例对象的数据类型，和它的构造函数息息相关
+    实例对象的类型=其对应的构造函数的函数名     Object=》object   Array=》array
+    获取实例对象的类型:  
+    实例.__proto__.constructor.name====>实例.constructor.name
+
+
+    最基础的两个创建对象的方法：
+    方式1： 字面量的方式 (相当于是内置构造函数创建对象的简写)
+    语法： var obj = {  键值对  }   
+    优点： 简单方便,运行速度更快，不能传参，也不会被预解析，更加的简洁稳定
+    共同点：
+     1.通过内置构造函数Object创建出来的对象，都是object类型的     
+     2.只能一个一个创建对象，批量创建对象会造成代码的冗余
+     */
+
+    var obj = {
+      name: '鹏鹏',
+      gender: '男',
+      age: 18,
+      eat: function () {
+        console.log('会吃饭');
+      },
+    };
+    console.log(obj);
+
+
+    /* 
+    方式2：内置构造函数的方式
+    语法： var obj = new Object();
+
+     不同点：
+     3.Object()构造函数可以接收参数，
+       通过这个参数可以  把对象实例的创建过程委托给另一个内置构造函数，创建出不同类型的对象
+       并返回另外一个对象实例，而这往往不是你想要的。
+
+    
+    */
+
+    var obj1 = new Object({
+      name: '鹏鹏',
+      gender: '男',
+      age: 18,
+      eat: function () {
+        console.log('会吃饭');
+      },
+    });
+
+
+
+    // 空对象 ---妈妈是Object--->o的类型是Object
+    var o1 = new Object();
+    console.log(o1); //{}
+    console.log(o1.constructor.name); // Object类型
+
+
+    // 等同于基本包装类型：
+
+    // 数值对象 ---> Object根据参数类型寄养给--->Number
+    var o2 = new Object(1);
+    console.log(o2); //{1}
+    console.log(o2.constructor.name); // Number
+
+
+    var o3 = new Number(1);
+    console.log(o3); //{1}
+
+
+    // 字符串对象  ---> Object根据参数类型寄养给--->String
+    var o4 = new Object("I am a string");
+    console.log(o4); // {"I am a string"}
+    console.log(o4.constructor.name); // String
+
+
+    // 布尔值对象  ---> Object根据参数类型寄养给--->Boolean
+    var o5 = new Object(true);
+    console.log(o5); // {true}
+    console.log(o5.constructor.name); // Boolean
+
+
+  </script>
+
+</body>
+
+</html>
