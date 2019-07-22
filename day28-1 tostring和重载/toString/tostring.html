@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1. Object 对象调用tostring方法
+    // toString()：返回对象的字符串表示
+    // 实例
+    var obj = { a: 1 };
+    console.log(obj.toString()) //"[object Object]"
+    console.log(Object.prototype.toString.call(obj))//"[object Object]"
+
+    // 其他对象调用Object.prototype.toString()方法
+    console.log(Object.prototype.toString.call({}))
+    // [object Object]
+    console.log(Object.prototype.toString.call([]))
+    // [object Array]
+    console.log(Object.prototype.toString.call(function () { }))
+    //[object Function]
+    console.log(Object.prototype.toString.call(''))
+    // [object String]"
+    console.log(Object.prototype.toString.call(1))
+    // [object Number]"
+    console.log(Object.prototype.toString.call(true))
+    // [object Boolean]"
+    console.log(Object.prototype.toString.call(null))
+    // [object Null]"
+    console.log(Object.prototype.toString.call(undefined))
+    // [object Undefined]"
+    console.log(Object.prototype.toString.call())
+    // [object Undefined]"
+    console.log(Object.prototype.toString.call(new Date()))
+    // [object Date]"
+    console.log(Object.prototype.toString.call(/at/))
+    // [object RegExp]"
+
+
+    // 2. Array中的toString 方法
+    // toString()：返回由数组中每个值的字符串形式拼接而成的一个以逗号分隔的字符串
+    var array = [1, 's', true, { a: 2 }];
+    console.log(array.toString());//"1,s,true,[object Object]"
+    console.log(Array.prototype.toString.call(array));//"1,s,true,[object Object]"
+    console.log(Object.prototype.toString.call(array));//[object Array]"
+
+
+    // 对于非数组对象调用Array.prototype.toString()方法
+    console.log(Array.prototype.toString.call({ asdsad: 'asdsad' }))
+    //"[object Object]"
+    console.log(Array.prototype.toString.call(function () { }))
+    //"[object Function]"
+    console.log(Array.prototype.toString.call(1))
+    //"[object Number]"
+    console.log(Array.prototype.toString.call(''))
+    //"[object String]"
+    console.log(Array.prototype.toString.call(true))
+    //"[object Boolean]"
+    console.log(Array.prototype.toString.call(/s/))
+    //"[object RegExp]"
+
+    // console.log(Array.prototype.toString.call(undefined))
+    // console.log(Array.prototype.toString.call(null))
+    // 数组对象通过this绑定调用Array.prototype.toString()方法，返回数组值的字符串拼接，
+    // 但是非数组对象通过this绑定调用Array.prototype.toString()方法，返回的是该对象的字符串表示，
+    // 另外null和undefined不可以通过绑定调用Array.prototype.toString()方法。
+
+
+    // 3.函数function的toString()方法
+    // toString()：返回函数的代码(函数体)
+    function foo() {
+      console.log('function');
+    };
+    console.log(foo.toString())
+    console.log(Function.prototype.toString.call(foo))
+    console.log(Object.prototype.toString.call(foo))
+
+    // 非函数对象也可以通过this绑定调用Array.prototype.toString()方法吗？
+    console.log(Function.prototype.toString.call({}));
+
+    Object.toString();
+    //"function Object() { [native code] }"
+    Function.toString();
+    //"function Function() { [native code] }"
+    Array.toString();
+    //"function Array() { [native code] }"
+
+
+    // 4. 基本包装类型（Boolean/Number/String类）
+    var str = 'wangpf';
+    str.toString();//"wangpf"
+    var num = 520;
+    num.toString();//"520"
+    var boo = true;
+    boo.toString(); //"true"
+  </script>
+</body>
+
+</html>

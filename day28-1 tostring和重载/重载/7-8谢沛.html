@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+  函数的重载
+    其他语言: 重载，简单说，就是函数或者方法有相同的名称，但是参数列表不相同的情形，这样的同名不同参数的函数或者方法之间，互相称之为重载函数或者方法
+
+  在js中实现函数的重载 (参考javascript 高级程序设计(第三版)P66)
+    
+		js不支持函数重载，那么如果出现函数明相同的情况下，后者会覆盖前者。
+		
+	 -->
+
+
+  <script>
+
+    function fn(a,b) {
+      console.log('1');
+    } 
+
+    function fn(a) {
+      console.log('2');
+    } 
+
+    fn()
+    // arguments 属性
+    function fn(fa, fb, fc) {
+      console.log(arguments.length)
+    }
+    // fn(1, 2, 3)
+    // fn(0)
+  </script>
+</body>
+
+</html>

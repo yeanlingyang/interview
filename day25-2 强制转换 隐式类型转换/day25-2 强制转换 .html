@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    function Yideng() {
+      getName = function () {
+        console.log(1);
+      }
+      return this
+    }
+
+    Yideng.getName = function () {
+      console.log(2);
+    }
+
+     Yideng.prototype.getName = function () {
+       console.log(3);
+     }
+    var getName = function() {
+      console.log(4);
+    }
+    function getName() {
+      console.log(5);
+    }
+
+     Yideng.getName()
+     new Yideng.getName()
+
+     /* 
+      答案： 2  2 
+      Yideng()是一个构造函数，构造函数.属性，就是给构造函数添加一个属性，
+      原来构造函数已经有了一个getName,后面又赋值了一个getName静态属性（静态属性：由构造函数直接使用的）,就替换了原来的getName,
+      Yideng.prototype.getName在原型上添加 getName 属性，第四个和第五个是同一个函数
+      new Yideng.getName() 就是执行了Yideng.getName()这个函数
+
+
+
+
+
+
+
+
+      
+     强制类型转换 和 隐式类型转换
+
+      1.强制类型转换
+        将值从一种类型转换成需要的一种类型，这个过程即为强制类型转换
+
+        强制类型转换：
+          parseInt()
+          parseFloat()
+          Number()
+          String（）
+          Boolean（）
+
+      2.隐试类型转换
+        不同类型的变量比较要先转类型，叫做类型转换，类型转换也叫隐式类型转换
+        隐式类型转换通常发生在运算符加减乘除，等于，还有小于，大于等
+        
+        隐式类型转换：
+          == ：undefined等于null; 字符串和数字比较时-->字符串转数字;.数字和布尔比较时-->布尔转数字; 字符串和布尔比较时-->两者转数字
+          console.log()：
+          alert()：
+     */
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- 
+      js延迟加载的方式
+      1. defer 属性
+        用法:  
+        <head>
+        <script src="xx.js" defer="defer"></script> 
+        </head>
+      在<script> 元素中设置 defer 属性，等于告诉浏览器立即下载，但延迟执行。
+      defer属性只适用于外部脚本文件
+
+
+      2. async 属性
+      用法:
+        <head>
+          <script src="xxx.js" async></script>
+        </head>
+        async属性也只适用于外部脚本文件
+        目的：不让页面等待脚本下载和执行，从而异步加载页面其他内容。
+              异步脚本一定会在页面 load 事件前执行。 
+              不能保证脚本会按顺序执行。
+
+      defer和async的优缺点: 都不会阻塞其他资源下载，所以不会影响页面的加载。 
+                           缺点：不能控制加载的顺序
+      
+      3. 动态创建DOM方式
+
+      4. 使用jQuery的getScript()方法
+        语法: 
+        $.getScript("outer.js",function(){//回调函数，成功获取文件后执行的函数  
+          console.log("脚本加载完成")  
+        });
+
+      5.使用setTimeout延迟方法
+      
+      6.让JS最后加载
+        把js外部引入的文件放到页面底部，来让js最后引入，从而加快页面加载速度
+      -->
+
+
+
+
+
+  <script>
+
+  </script>
+</body>
+
+</html>

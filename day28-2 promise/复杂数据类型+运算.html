@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //undefined  null         boolean                number             string
+    //NaN        0    true被转换为1,false转换为+0   无需转换    由字符串解析为数字。例如，"324"被转换为324 
+
+    // 转化为数字类型
+    //true: 1   false: 0   []: 0   {}: NaN
+    // {}+[]   []+{}
+
+  // 1. 先谈谈为什么会有这种问题，这是因为js的弱类型导致的，js的弱类型，导致js的隐式类型转换频繁。比如像标题中的{} + []，[] + {}，你完全不能去预测它的类型。
+
+  //2.先来看一条在js里的隐式的rule，
+  //2-1js在进行加法运算的时候， 会先推测两个操作数是不是number,如果是，则直接相加得出结果。
+  //2-2如果其中有一个操作数为string，则将另一个操作数隐式的转换为string，然后进行字符串拼接得出结果。 
+  //2-3如果操作数为对象或者是数组这种复杂的数据类型，那么就将两个操作数都转换为字符串，进行拼接 
+  //2-4如果操作数是像boolean这种的简单数据类型，那么就将操作数转换为number相加得出结果
+  console.log(1+3);//两个均为数字
+  console.log('1'+'3');//两个均为字符串
+  console.log(1+'4');//一个数字,一个字符串 
+
+  //以下操作先将[]或对象的复杂数据类型通过String转化为字符串
+  console.log(1+[]);//为什么结果是字符串? 复杂类型先转化为字符串
+  console.log('1'+[]);//String([]) 复杂数据类型与简单的字符串如何运算?
+  console.log(1+{});//1[object Object] String({}) 
+  console.log({}+1);//[object Object]1
+  console.log('1' + {});//1[object Object]
+
+
+  //3.例子 (复杂数据类型与复杂数据类型的+好运算)
+  // 3-1先来看第一个[] + {}，这是两个复杂数据结构相加的例子，按照上面的rule，我们先将两个操作数转换为string，然后进行拼接，于是
+  // [] -----> ''
+  // {} -----> '[object Object]'
+  console.log([] + {});  // [] + {} = '[object Object]'
+
+  //3-2 再来看第二个 {} + []，这也是两个复杂数据结构相加的例子，看样子与第一个没有什么差别，按理说也应该是[object Object]，
+  //但是你相加的时候你会发现， 得出的答案是 0！
+
+  // 这是为什么呢???????
+
+  // 原因是有的js解释器会将开头的 {} 看作一个代码块，而不是一个js对象，于是真正参与运算的是+[]，就是将[]转换为number，于是得出答案0。 
+  //那么我们如何证明{}被看作一个代码块而不是一个js对象呢？很简单， 我们可以在{}里写上一些语句，比如
+  {console.log("hello")} + []; 
+
+  console.log({}+{});//Firefox中的结果为NaN  而谷歌中 "[object Object][object Object]" ????
+  //Firefox解析:先+{}  == NaN   ,再{} + NaN == NaN
+  //NaN 其实是表达式 +{} 计算的结果 (+ 加号以及第二个 {})。 你在这里看到的 + 加号并不是二元运算符「加法」，而是一个一元运算符，
+  // 作用是将它后面的操作数转换成数字，和 Number() 函数完全一样。例如:
+  //而不是一个js对象，于是真正参与运算的是+[]，就是将[]转换为number，于是得出答案0
+
+
+
+  //为什么第一个 {} 会被解析成代码块（code block）呢？ 因为整个输入被解析成了一个语句：如果左大括号出现在一条语句的开头，
+  //则这个左大括号会被解析成一个代码块的开始。
+
+  
+  
+
+    
+  
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+     //Object.keys()  方法会返回一个数组，成员是参数对象自身的所有可遍历属性的键名。
+    //数组中属性名的排列顺序和使用 for…in 循环遍历该对象时返回的顺序一致 （两者的主要区别是 一个 for-in 循环还会遍历其原型链上的属性）。
+    
+    //传入对象，返回属性名
+    var obj = {a:'123',b:'345'}
+    console.log(Object.keys(obj));  //['a','b']
+
+    var obj1= {100: 'a', 2 : 'b' , 7 : 'c'}
+    console.log(Object.keys(obj1)); //['2','7','10']
+
+    //传入字符串，返回索引
+    var str = 'ab1234'
+    console.log(Object.keys(str)); // ["0", "1", "2", "3", "4", "5"]
+
+    //传入数组，返回索引
+    var arr = ['a','b','c']
+    console.log(Object.keys(arr))  // ["0", "1", "2"]
+
+
+
+    //注意在 ES5 环境，如果传入的参数不是一个对象那么它会报 TypeError。
+    //在 ES6 环境，如果传入的是一个非对象参数，内部会对参数作一次强制对象转换，如果转换不成功会抛出 TypeError。
+    // console.log( Object.keys('foo'));  // ["0", "1", "2"]
+    // console.log( Object.keys('foo'));  //'foo' is not a object
+
+
+  </script>
+</body>
+</html>

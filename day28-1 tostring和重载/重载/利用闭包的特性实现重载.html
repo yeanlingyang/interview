@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 需求:给对象people添加一个 find方法,
+    // 该方法被调用时如果不传参数就返回所有的people.value
+    // 传入一个参数就返回匹配的firstName
+    // 传入两个参数就返回匹配的人名
+
+
+    var people = {
+      values: ["Dean Edwards", "Alex Russell", "Dean Tom"]
+    };
+
+    function addMethod(object, fn) {
+      let old = object.find
+
+      // 给对象添加方法
+      object.find = function () {
+        if (arguments.length === fn.length) {
+          return fn.apply(this, arguments)
+        } else if (typeof old === 'function') {
+          return old.apply(this, arguments)
+        }
+      }
+    }
+
+    // 不传参数时，返回peopld.values里面的所有元素
+    addMethod(people,function () {
+      return this.values;
+    });
+
+    // 传一个参数时，按first-name的匹配进行返回
+    addMethod(people,function (firstName) { 
+      var ret = [];
+      for (var i = 0; i < this.values.length; i++) {
+        if (this.values[i].indexOf(firstName) === 0) {
+          ret.push(this.values[i]);
+        }
+      } 
+      // ret储存了符合条件的first-name 的项
+      return ret;
+    });
+
+    // 传两个参数时，返回first-name和last-name都匹配的元素
+    addMethod(people,function (firstName, lastName) {
+      var ret = [];
+      for (var i = 0; i < this.values.length; i++) {
+        if (this.values[i] === (firstName + " " + lastName)) {
+          ret.push(this.values[i]);
+        }
+      }
+      // ret 储存了符合条件的first-name 和 last-name的项
+      return ret;
+    });
+
+
+    console.log(people.find());
+    console.log(people.find('Dean'));
+    console.log(people.find('Dean', 'Tom'));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // ajax的交互原理
+    // ajax的原理简单来说通过XMLHTTPRequest对象来向服务器发异步请求，从服务器获取数据然后
+    // 用JavaScript来操作DOM而更新页面
+    // 1：创建XMLHttpRequest对象
+    // 2：建立连接，设置为GET发送：xmlHttp.open("GET","/ajax/getHint.jsp?q="+txtValue,true)
+    // 3：发送数据：xmlHttp.send()
+    // 4：注册回调方法：xmlHttp.onreadystatechange=ajaxCallback
+    // 4：执行回调：
+        function ajaxCallback(){
+            if(xmlHttp.readyState==4&&xmlHttp.status==200){
+                searchInput.value=xmlHttp.responseText
+            }
+        }
+    
+    // ajax的缺点
+    // 1：ajax不支持浏览器back按钮
+    // 2：安全问题，暴露了与服务器交互的细节
+    // 3：对搜索引擎的支持比较弱
+    // 4：破坏了程序的异常机制
+    // 5：不容易调试
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    //Object.assign() 方法用于对象的合并  第一个参数为目标对象，后面依次为源对象  
+    
+    var first = {name:'zs'}
+    var last = {age:18}
+    var person = Object.assign(first,last)
+    console.log(person);
+
+    //如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
+    // var target = {a:1,b:1}
+    // var source1 = {b:2,c:2}
+    // var source2 = {c:3}
+    // var result = Object.assign(target,source1,source2)
+    // console.log(result);
+
+
+    //用于克隆对象
+    // var clone = Object.assign({},person)
+    // console.log(clone);
+    // clone.name = 'ls'
+    //注意点 
+    //对于Object.assign()而言, 如果对象的属性值为简单类型（string， number），通过Object.assign({},srcObj);得到的新对象为‘深拷贝’；
+    //如果属性值为对象或其它引用类型，那对于这个对象而言其实是浅拷贝的
+
+
+
+  </script>
+
+</body>
+
+</html>

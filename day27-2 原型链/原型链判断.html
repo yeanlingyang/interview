@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    //Person构造函数
+    function Person(name, age) {
+      this.name = name;
+      this.age = age
+    }
+    //实例p
+    let p = new Person('zs', 18)
+
+    //结合完整原型链判断以下关系是否正确
+    // 1. Person.prototype === p.__proto__
+    // 2. Person.prototype.__proto__ === Object.prototype
+    // 3. Function.prototype.__proto__ === Object.prototype
+    // 4. Function.prototype.__proto__.constructor === Object
+    // 5. Function instanceof Function
+    // 6. Function instanceof Object
+    // 7. Object instanceof Function
+    // 8. Object instanceof Object
+
+
+  </script>
+</body>
+
+</html>

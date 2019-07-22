@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<!-- 在前端开发的过程中，我们经常会需要绑定一些持续触发的事件，
+  如 resize、scroll、mousemove、onkeyup、onkeydown等等这些高频率事件，但有些时候我们并不希望在事件持续触发的过程中那么频繁地去执行函数。
+ -->
+<body>
+   <div id="content"
+    style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:#ccc;font-size:80px;">
+   </div>
+  <script>
+    let num = 1;
+    let content = document.getElementById('content');
+
+    function count() {
+      content.innerHTML = num++;
+    };
+    content.onmousemove = count;
+    
+  </script>
+
+  <!-- 
+    函数防抖和函数节流
+    函数防抖：是函数在特定的时间内不被再调用后执行
+    函数节流：是确保函数特定的时间内至多执行一次。
+    
+  
+    防抖（debounce）
+          就是指触发事件后在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。
+          防抖函数分为非立即执行版和立即执行版。
+        思路: 先设置一个定时器变量，用闭包保存，
+              保证不会被内存释放，在事件触发的时候，也就是只要事件触发，先清除这个定时器，
+              然后再设置一个，那么只要事件持续触发，刚刚建立的定时器就会被销毁，
+              直到最后我们不在触发事件，就执行最后一次设置的定时器。
+  
+  
+  -->
+  <!-- <script>
+      let num = 1;
+      let content = document.getElementById('content');
+      // 非执行版
+      // 非立即执行版的意思是触发事件后函数不会立即执行，而是在 n 秒后执行，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。
+      function count() {
+        content.innerHTML = num++;
+      };
+      function debounce(func, wait) {
+          let timeout;
+          return function () {
+            let context = this;  
+            let args = arguments; //获取的this和参数，为了让 debounce 函数最终返回的函数 this 指向不变以及依旧能接受到 e 参数。
+
+            if (timeout) clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+              func.apply(context, args)  
+            }, wait);
+          }
+        }
+      content.onmousemove = debounce(count, 1000);  
+      // 在触发事件后函数 1 秒后才执行，而如果我在触发事件后的 1 秒内又触发了事件，则会重新计算函数执行时间。
+  </script> -->
+
+    
+    <!-- <script>
+      // 立即执行版
+      // 立即执行版的意思是触发事件后函数会立即执行，然后 n 秒内不触发事件才能继续执行函数的效果。
+      let num = 1;
+      let content = document.getElementById('content');
+
+       function count() {
+          content.innerHTML = num++;
+        };
+      function debounce(func, wait) {
+          let timeout;
+          return function () {
+            let context = this;
+            let args = arguments;
+
+            if (timeout) clearTimeout(timeout);
+
+            let callNow = !timeout;
+            timeout = setTimeout(() => {
+              timeout = null;
+            }, wait)
+
+            if (callNow) func.apply(context, args)
+          }
+        }
+        content.onmousemove = debounce(count, 1000);
+        
+    </script> -->
+    <!-- 
+      双剑合璧版
+       * @desc 函数防抖
+       * @param func 函数
+       * @param wait 延迟执行毫秒数
+       * @param immediate true 表立即执行，false 表非立即执行
+     -->
+     <!-- <script>
+        let num = 1;
+          let content = document.getElementById('content');
+
+          function count() {
+            content.innerHTML = num++;
+          };
+          function debounce(func, wait, immediate) {
+              let timeout;
+
+              return function () {
+                let context = this;
+                let args = arguments;
+
+                if (timeout) clearTimeout(timeout);
+                if (immediate) {
+                  var callNow = !timeout;
+                  timeout = setTimeout(() => {
+                    timeout = null;
+                  }, wait)
+                  if (callNow) func.apply(context, args)
+                }
+                else {
+                  timeout = setTimeout(function () {
+                    func.apply(context, args)
+                  }, wait);
+                }
+              }
+            }
+        content.onmousemove = debounce(count, 50);
+
+     </script> -->
+
+     <!-- 
+       函数防抖的应用场景
+        连续的事件，只需触发一次回调的场景有：
+
+      1.搜索框搜索输入。只需用户最后一次输入完，再发送请求
+      2.手机号、邮箱验证输入检测
+      3.窗口大小Resize。只需窗口调整完成后，计算窗口大小。防止重复渲染。
+      -->
+
+     <!-- 
+       
+       节流（throttle）
+              所谓节流，就是指连续触发事件但是在 n 秒中只执行一次函数。节流会稀释函数的执行频率。节流就是在让函数在特定的时间内只执行一次.
+              事件第一次触发的时候，记录下函数执行的时间点，当函数想要再一次执行，需要间隔一定的时间才能执行，
+              也就是每间隔一定的时间，才能触发这个函数，而不能快速触发，这就是节流的方法。
+              对于节流，一般有两种方式可以实现，分别是时间戳版和定时器版。
+
+              时间戳版：
+              
+      -->
+      <!-- <script>
+          let num = 1;
+          let content = document.getElementById('content');
+          function count() {
+              content.innerHTML = num++;
+            };
+          function throttle(func, wait) {
+            let previous = 0;
+            return function () {
+              let now = Date.now();
+              let context = this;
+              let args = arguments;
+              if (now - previous > wait) {
+                func.apply(context, args);
+                previous = now;
+              }
+            }
+          }
+          content.onmousemove = throttle(count, 1000);
+          //在持续触发事件的过程中，函数会立即执行，并且每 1s 执行一次。
+      </script> -->
+
+
+
+
+      <!-- <script>
+        //定时器版
+         let num = 1;
+          let content = document.getElementById('content');
+          function count() {
+            content.innerHTML = num++;
+          };
+          function throttle(func, wait) {
+              let timeout;
+              return function () {
+                let context = this;
+                let args = arguments;
+                if (!timeout) {
+                  timeout = setTimeout(() => {
+                    timeout = null;
+                    func.apply(context, args)
+                  }, wait)
+                }
+
+              }
+            }
+          content.onmousemove = throttle(count, 1000);
+          /* 在持续触发事件的过程中，函数不会立即执行，并且每 1s 执行一次，在停止触发事件后，函数还会再执行一次。
+            我们应该可以很容易的发现，其实时间戳版和定时器版的节流函数的区别就是，时间戳版的函数触发是在时间段内开始的时候，而定时器版的函数触发是在时间段内结束的时候。
+           */
+
+      </script> -->
+
+     
+
+
+      <!--
+        函数节流的应用
+         间隔一段时间执行一次回调的场景有：
+          1滚动加载，加载更多或滚到底部监听
+          2谷歌搜索框，搜索联想功能
+          3高频点击提交，表单重复提交
+        -->
+
+</body>
+</html>

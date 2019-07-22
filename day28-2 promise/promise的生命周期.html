@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+ <script>
+   /* 
+    每个 Promise 都会经历一个短暂的生命周期，初始为挂起状态（pending state） ，这表示异步操作尚未结束。一个挂起的 Promise 也被认为是未决的（unsettled )。一旦异步操作结束， Promise就会被认为是已决的（settled ） ，并进入两种可能状态之一：
+    
+    已完成（fulfilled ） ： Promise 的异步操作已成功结束；
+
+    已拒绝（rejected ） ： Promise 的异步操作未成功结束，可能是一个错误，或由其他原因导致。
+
+    内部的[[PromiseState]] 属性会被设置为"pending" 、 "fulfilled" 或 "rejected"，以反映Promise的状态。该属性并未在 Promise 对象上被暴露出来，因此你无法以编程方式判断 Promise 到底处于哪种状态。不过你可以使用then()方法在 Promise 的状态改变时执行一些特定操作。
+
+    
+    链接：https://www.jianshu.com/p/df667b84b121
+    
+   
+    */
+ 
+ </script> 
+</body>
+</html>

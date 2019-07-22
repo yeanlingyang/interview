@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // jq中ajax请求的步骤，怎么解决跨域的？
+        //在实际项目开发中，提交表单时常常由于网络或者其原因，
+        // 用户点击提交按钮误认为自己没有操作成功，进而会重复提交按钮操作次数，
+        // 如果页面前端代码没有做一些相应的处理，通常会导致多条同样的数据插入数据库，
+        // 导致脏数据的增加。要避免这种现象，在$.ajax请求中的beforeSend方法中把提交按钮禁用掉，
+        // 等到Ajax请求执行完毕，在恢复按钮的可用状态。
+    
+
+
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            url: "/Home/GetList",
+            // 防止重复数据
+            // ajax请求服务器加载数据列表时提示loading(“加载中，请稍后...”),
+            //这种情况下用户就不会造成多次发送导致脏数据的增加
+            beforeSend: function () {
+                $("loading").show();
+            },
+
+            success: function (data) {
+                if (data == "Success") {
+                    // ...
+                }
+            },
+            // 成功后隐藏
+            complete: function () {
+                $("loading").hide();
+            },
+            error: function (data) {
+                console.info("error: " + data.responseText);
+            }
+        });
+        // jsonp的原理
+        // ajax请求受同源策略的影响，不允许进行跨域请求，而script标签的src属性中的链接却可以访问跨域的
+        // js脚本，利用这个特性，服务器不再返回json格式的数据，而是返回一段调用某个函数的js代码，
+        // 在src中进行了调用，就实现了跨域
+
+        // 优点：
+        // 完美解决了在测试或者开发中获取不同域下的数据，用户传递一个callback参数给服务端，
+        // 然后服务端返回数据时会将这个callback参数作为函数名来包裹住json数据，这样客户端就可以
+        // 随意定制自己的函数来自动处理返回数据了
+
+        // 缺点
+        // jsonp只支持get请求而不支持post请求，也就是说想传给后台一个json格式的数据，浏览器会
+        // 报一个http状态码415错误，告诉你请求格式不对
+
+    </script>
+</body>
+
+</html>

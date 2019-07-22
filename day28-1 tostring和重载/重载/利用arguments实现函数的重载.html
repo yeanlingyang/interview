@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 函数的arguments属性,是一个伪数组,储存了该函数被调用时的参数列表
+    // argument.length 该伪数组的长度
+    // argument[index] 该伪数组下标对应的值
+    // 通过对argument的长度或者类型进行判断可以模拟函数的重载
+
+    // 利用arguments.length 属性进行模拟实现函数的重载
+    function fn1(a, s, d) {
+      switch (arguments.length) {
+        case 0:
+          console.log('没有参数');
+          break;
+        case 1:
+          console.log('参数1个');
+          break;
+        case 2:
+          console.log('参数2个');
+          break;
+        case 3:
+          console.log('参数3个');
+          break;
+        default:
+          break;
+      }
+    }
+    // fn1()
+    // fn1(0)
+    // fn1(1, 2)
+    // console.log(fn1.length);
+  </script>
+</body>
+
+</html>

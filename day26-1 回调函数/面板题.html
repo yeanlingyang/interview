@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  let app = {
+        ary: [],
+        use(fn) {
+            this.ary.push(fn);
+        }
+        
+    };
+    
+    app.use((next) => {
+        console.log(1);       
+        next();
+        console.log(2)     
+    });
+    app.use((next) => {
+        console.log(3);     
+        next();
+        console.log(4)      
+    });
+    app.use((next) => {
+        console.log(5);     
+        next();
+        console.log(6)      
+    });
+    callBack(0);
+    function callBack(index) {
+      // console.log(app.ary)
+        if (index === app.ary.length)
+        
+            return;
+        let newAry = app.ary[index];
+        newAry(() => {
+            callBack(index + 1);
+        })
+    }
+  </script>
+</body>
+</html>

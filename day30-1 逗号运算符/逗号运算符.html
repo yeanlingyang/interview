@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+
+
+    // { } +[]：根据语句优先原则  { } 被理解为复合语句块，因此相当于 { }; +[]。[]为空，结果为0
+
+    // console.log({} + []) : js把()中的语句当做一个表达式，因此{ } 不能被理解为语句块，
+    // 而被理解为"[object Object]" + ""，console.log("[object Object]" + "")打印结果为[object Object]。
+    // console.log({} + [])
+    // console.log([] + {})
+
+
+
+    
+
+    // 逗号运算符的特性及作用：
+    //      逗号运算符的作用是将若干表达式连接起来,将多个表达式视为单个表达式
+    //      它的优先级是所有运算符中最低的，结合方向是自左至右。
+    //      它将先计算左边的参数，再计算右边的参数值。然后返回最右边参数的值
+
+    // 逗号表达式:
+    //   一般形式：表达式1，表达式2，表达式3，.....表达式n
+    //   求解过程：先计算表达式1的值，再计算表达式2的值，......一直计算到表达式n的值。最后整个表达式的值是表达式n的值。
+
+    // console.log(x = 8*2, x*4)
+    // console.log((x = 8*2, x*4))
+    // console.log((x = 8*2, x*4) , x*2)
+    // console.log(((x = 8*2, x*4) , x*2))
+    // console.log(x = (z=5,5*2))
+
+    // 请注意：并不是所有的逗号都要看成逗号运算符，如在函数调用时，各个参数是用逗号分隔开的，
+    // 这里的逗号并不是逗号运算符。如：printf("%d, %d, %d", x, y, z);
+
+
+
+    // var out = 25
+    //   inner = {
+    //     out: 20,
+    //     func: function () {
+    //       var out = 30
+    //       return this.out
+    //     }
+    //   }
+    // console.log((inner.func, inner.func)())
+    // console.log(inner.func())
+    // console.log((inner.func)())
+    // console.log((inner.func = inner.func)())
+
+
+
+    
+    // ()操作符有两种用法，
+    // 一是作为圆括号运算符，提升括号内表达式的优先级；
+    // 二是作为函数调用操作符，用于执行在()操作符之前指向的函数名
+
+
+    // 25，20，20，25
+    // 因为(inner.func, inner.func)是进行逗号运算符，逗号运算符就是运算前一段表达式
+    // 且返回后一段表达式结果，唯一个函数指向windows。第二和第三个console.log的作用域都是inner,
+    // 也就是他们执行的其实是inner.func()。
+    // 考查的是一个等号运算inner.func = inner.func其实返回的是运算的结果，即函数inner.func
+
+
+  </script>
+</body>
+
+</html>
