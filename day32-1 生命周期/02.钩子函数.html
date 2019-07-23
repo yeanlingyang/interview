@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ msg }}</h1>
+    </div>
+
+    <!-- 
+      vue的钩子函数有11个，新增三个（查文档）
+      重要的有8个，分为四组，图示
+      钩子函数会在生命周期的每一个重要的阶段前后提供
+
+      发送ajax的特点：
+      越早发越好：请求是异步的需要时间，越早发数据渲染页面越早
+      初始化阶段发：页面一进来就发
+
+      最重要的两个：
+      1-在created里发，因为此时vm是有数据的
+      mounted和beforeMount也可以发，推荐在created里发，越早越好
+      2- mounted里面有DOM结构，适合操作DOM，比如需要用一些库的时候
+       
+      偶尔用到，destroyed阶段清除定时器，释放资源，
+      比如：vue里面开了定时器，定时器时开了不会自动关闭的，当vue整个被销毁，定时器还在跑会占内存
+     -->
+    <script src="vue.js"></script>
+    <script>
+
+      const vm = new Vue({
+    
+        el: '#app',
+        data: {
+          msg: 'hello vue',
+          list: []
+        },
+        beforeCreate() {
+          console.warn('beforeCreate', '会在vue实例数据初始化前面执行')
+          console.warn(this.msg)//此时还没有数据
+        },
+        created() {
+          console.warn('created', '会在vue实例数据初始化后面执行')
+          console.warn(this.msg)//初始化完成，有数据
+        },
+        beforeMount() {
+          console.warn('beforeMount', '在渲染的结构替换el之前')
+          console.warn(document.querySelector('#app').innerHTML)
+        },
+        mounted() {
+          console.warn('mounted', '在渲染的结构替换el之后')
+          console.warn(document.querySelector('#app').innerHTML)
+        },
+        beforeUpdate() {
+          console.warn('beforeUpdate', '数据发生了改变，DOM更新之前')
+          console.warn(document.querySelector('#app').innerHTML)
+        },
+        updated() {
+          console.warn('updated', '数据发生了改变，DOM更新之后')
+          console.warn(document.querySelector('#app').innerHTML)
+        },
+        beforeDestroy() {
+          console.warn('beforeDestroy', '销毁前执行')
+        },
+        destroyed() {
+          console.warn('destroyed', '销毁后执行')
+        }
+      })
+    </script>
+  </body>
+</html>

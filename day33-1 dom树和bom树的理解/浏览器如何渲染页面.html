@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+浏览器工作流程大体分为如下三部分：
+
+1）浏览器会解析三个东西：
+一个是HTML，会产生一个DOM Tree
+CSS，解析CSS会产生CSS规则树 
+Javascript，脚本，主要是通过DOM API 和 CSSOM API来操作DOM Tree和CSS Rule Tree.
+
+2）解析完成后，浏览器引擎会通过DOM Tree 和 CSS Rule Tree 来构造 Render Tree。
+
+3）最后通过调用操作系统Native GUI的API绘制。
+   根据渲染树来布局，以计算每个节点的几何信息。
+   将各个节点绘制到屏幕上。
+
+
+CSSOM是一组允许JavaScript操作CSS的API。它非常类似于DOM，但是用于CSS而不是HTML。
+     它允许用户动态读取和修改CSS样式。
+
+</body>
+</html>

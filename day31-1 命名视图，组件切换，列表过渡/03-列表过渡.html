@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <script src=""https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js""></script>
+  <style>
+  
+  .list-item{
+    /* transition: all 1s; */
+    display: inline-block;
+    margin-left : 10px;
+
+  }
+  .list-enter,
+  .list-leave-to{
+    opacity: 0;
+    transform: translateY(30px)
+  }
+  .list-enter-active,
+  .list-leave-active{
+    
+    transition: all 1s ease;
+    
+  }
+  /* .list-move {
+      transition: all 0.6s ease;
+    }
+    .list-leave-active{
+      position: absolute;
+    } */
+  </style>
+</head>
+<body>
+ 
+  <div id="app">
+  <button @click='addItems'>ADD</button>
+  <button @click='removeItems'>ROMOVE</button>
+ <!--  appear -->
+    <transition-group name='list' tag='p'>
+        <span v-for = 'item in items' :key='item' class="list-item">
+            {{ item }}
+        </span>
+    </transition-group>
+ 
+ 
+  </div>
+  <script>
+   new Vue({
+    el : '#app',
+    data : {
+     items : [1,3,4,5,6,7,8,9,0,2],
+     maxItems : 10
+    },
+    methods : {
+       randomIndex(){
+          return Math.floor(Math.random() * this.items.length)
+       },
+       addItems(){
+         return this.items.splice(this.randomIndex(), 0 , this.maxItems++)
+       },
+       removeItems(){
+           return this.items.splice(this.randomIndex(),1)
+       },
+       shuffle(){
+         this.items =_.shuffle(this.items)
+       }
+    },
+  })
+  </script>
+</body>
+</html>

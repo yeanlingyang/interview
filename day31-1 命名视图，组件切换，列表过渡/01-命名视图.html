@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <script src="./vue-router.js"></script>
+  <style>
+  html,body,h1{
+    margin: 0;
+    padding: 0;
+  }
+  .header{
+    height: 50px;
+    background-color: yellow;
+  }
+  .aside{
+    height: 500px;
+    background-color:teal;
+    overflow: hidden;
+  }
+  .main{
+    float: right;
+    height: 300px;
+    background-color:skyblue;
+    
+  }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <router-view  class="header"></router-view>
+    
+    <router-view  class="main"></router-view>
+    <router-view  class="aside"></router-view>
+    
+    
+  </div>
+  <script>
+    let header = {
+      template: '<h1>Header</h1>'
+    }
+    let aside = {
+      template: '<h1 style="text-align:center">aside</h1>'
+      
+    }
+    let main = {
+      template: '<h1>main主体</h1>'
+    }
+
+    let router = new VueRouter({
+      routes: [
+        { path : '/' , component : header},
+        // {
+        //   path: '/',
+        //   components: {
+        //   default: header,
+        //   aside,
+        //   main
+        //   }
+        // }
+
+      ]
+    })
+    new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+
+      },
+      router
+    })
+  </script>
+</body>
+
+</html>

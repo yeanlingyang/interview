@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{msg}} ----- 施工队</h1>
+
+      <!-- <p>我是$0</p> -->
+    </div>
+
+    <!-- 
+      生命周期：一个事件从出生到消亡的整 个阶段
+      vue的生命周期：一个vue实例从new Vue开始创建， 到最终这个vue实例被销毁的整个过程就是vue的生命周期
+
+      生命周期函数（钩子函数）：vue的生命周期是已经确定好了的。如果我们希望能够参与到vue的生命周期中，就需要用到vue的生命周期函数（钩子函数） vue会在特定的时机去调用特定的钩子函数。
+
+      outerHtml: 通过$0在控制台打印，包括标签的内容
+      数据更新阶段，数据改变视图发送改变，形成死循环，一般vue实例默认不会死，当页面关掉或者主件被销毁 循环会结束。
+      拆卸监视程序、子组件和事件侦听器
+    -->
+
+    <script src="./vue.js"></script>
+    <script>
+      // 设置el有两种方式
+      // 1.提供el参数
+      // 2.调用vm.$mount() monunt 挂载 （不常用）
+    
+      const vm = new Vue({
+        // el: '#app',
+        data: {
+          msg: 'hello vue'
+        },
+        // template:'<a href = "#">{{msg}}<a>'
+          //此时页面渲染的是a标签，因为template的优先级高于el ,
+        
+      })
+    // 设置vm的视图为 #app
+      vm.$mount('#app')
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+

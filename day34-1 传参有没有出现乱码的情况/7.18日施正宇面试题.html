@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 1在前后端数据交互的时候，有处理过（参数）数据加密的情况吗？
+  引入Base64文件
+   例如：var obj = {
+    name:"lisi",
+    age:18,
+    getBase:function(){}
+  };
+  var str = JSON.stringify(obj);
+  var base64 = new Base64();
+  var baseStr = base64.encode(str);//加密
+  var deBaseStr = base64.decode(baseStr);//解密
+
+
+   2页面传参有没有出现过乱码的情况？如果有你是怎么解决的？
+   解决的方式：
+   1）可以使用H5的本地存储或者是cookie来进行传递。
+   2）在url传参的时候用encodeURL()进行编码一下中文参数传递到下个页面
+    然后用decodeURL()进行解码一下就可以了。
+
+    3你是怎么理解ajax的？Ajax的原理能说一下吗？
+    Ajax实现了客户端与服务器进行数据交流过程。使用技术的好处是：不用页面刷新，并且在等待页面传输数据的同时可以进行其他操作。
+    Ajax的原理简单来说通过XmlHttpRequest对象来向服务器发异步请求，从服务器获得数据，然后用javascript来操作DOM而更新页面。
+
+
+    4你们公司是怎么解决跨域这个问题？
+    我们在公司开发常使用cors来解决跨域的问题，这个要求后端来设置。
+    后端需要设置：Access-Control-Allow-Origin头，处理Session问题
+    response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+    response.setHeader("Access-Control-Allow-Credentials", "true");
+    response.setHeader("P3P", "CP=CAO PSA OUR");
+    if(request.getHeader("Access-Control-Request-Method")!=null&& "OPTIONS".equals(request.getMethod())) {
+    response.addHeader("Access-Control-Allow-Methods","POST,GET,TRACE,OPTIONS");
+    response.addHeader("Access-Control-Allow-Headers", "Content-Type,Origin,Accept");
+    response.addHeader("Access-Control-Max-Age", "120");
+
+
+    5get和post有什么区别？
+    Http定义了与服务器交互的不同方法有很多种，最基本的方法有4种，分别是GET，POST，PUT，DELETE。URL全称是资源描述符，我们可以这样认为：一个URL地址，它用于描述一个网络上的资源，而HTTP中的GET，POST，PUT，DELETE就对应着对这个资源的查，改，增，删4个操作。
+    1）get 和 post只是一种传递数据的方式，get也可以把数据传到服务器，他们的本质都是发送请求和接收结果。
+    2）get传送的数据量较小，不能大于2KB。post传送的数据量较大，一般被默认为不受限制。
+    3）get安全性非常低，post安全性较高。 -->
+  </body>
+</html>

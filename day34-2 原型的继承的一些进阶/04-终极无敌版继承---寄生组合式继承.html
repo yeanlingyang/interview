@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+  
+  // 父类
+  function Animal (color, age, hasWhat) {
+      this.hasColor = color
+      this.age = age
+      this.hasWhat = hasWhat
+    }
+
+    Animal.prototype.run = function () {
+      console.log(this)
+      console.log('我是动物, 我会跑')
+    }
+
+    function Dog (color, age, hasWhat, kind, likeThings) {
+      Animal.call(this, color, age, hasWhat)
+      this.kind = kind  
+      this.likeThings = likeThings
+    }
+
+    // 中间函数
+    function middleFn (fn) {
+      // 空函数，降低了性能损耗
+      function A () {}
+      A.prototype = fn.prototype
+      return new A()
+    }
+    Dog.prototype = middleFn(Animal)
+
+    // 看了上面代码有人肯定会想好麻烦，为什么不用下面这种
+    // Dog.prototype = Animal.prototype
+    // 因为原型上还存在一个constructor属性，指向构造函数，那么问题就来了，要么指向Dog要么指向Animal
+    // 所以有点小瑕疵
+
+    // 后来就有了 Object.create(), 以上代码就可以被这一行替代
+    // Dog.prototype = Object.create(Animal.prototype)
+
+    console.log(Dog.prototype);
+    Dog.prototype.constructor = Dog
+    
+    const erHa = new Dog('yes', 17, ['eys', 'ear'],'哈士奇', ['骨头', '狗粮'])
+    const jinMao = new Dog('yes', 17, ['eys', 'ear'],'金毛', ['肉', '狗粮'])
+    
+    erHa.hasWhat.push('thirdEye')
+
+    console.log(erHa);
+    console.log(jinMao);
+    erHa.run()
+    console.log(Dog.prototype.constructor)
+    console.log(Animal.prototype.constructor)
+
+    // 值得注意的是终极继承 Animal构造函数的原型对象上如果存在复杂数据类型，意味着子类去修改的话，依旧会影响到其他子类，
+    // 不想被改变的话可以使用深拷贝来实现
+
+    // 这是ES5里的继承，相对于ES6有点繁琐， ES6中有了class关键词---类， 继承就使用了关键词extends，比较容易
+
+    // 听别人说这个应用得地方很少，不过似乎在面试中可以加分，一般用于 canvas动画里面牛逼的动画，自定义确认框，输入框什么得。。。。
+  </script>
+  
+</body>
+</html>

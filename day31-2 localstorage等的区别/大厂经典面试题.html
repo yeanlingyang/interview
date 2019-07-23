@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    写一个js函数，实现对一个数字每3位加一个逗号，如输入100000， 输出100,000（不考虑负数，小数）
+    https://blog.csdn.net/sushauai/article/details/52958162
+   -->
+  <script>
+
+    // 方法1:
+    function toThousands(num) {
+      var result = [], counter = 0;
+      num = (num || 0).toString().split('');
+      for (var i = num.length - 1; i >= 0; i--) {
+        counter++;
+        result.unshift(num[i]);
+        if (!(counter % 3) && i != 0) { result.unshift(','); }
+      }
+      return result.join('');
+    }
+
+    console.log(toThousands(1234567));
+
+    // 解题思路:
+    // 数字转换成字符串后，打散为数组，再从末尾开始，逐个把数组中的元素插入到新数组（result）的开头。每插入一个元素，counter就计一次数（加1），当counter为3的倍数时，就插入一个逗号，但是要注意开头（i为0时）不需要逗号。最后通过调用新数组的join方法得出结果。
+
+
+    // 方法2:
+    // var arr = [];
+    // function main(num) {
+    //   var n = parseInt(num).toString();
+    //   s(n);
+    // }
+    // function s(num) {
+    //   if (num.length > 3) {
+    //     arr[arr.length] = num.slice(-3);
+    //     s(num.slice(0, -3));
+    //   }
+    //   else {
+    //     arr[arr.length] = num;
+    //   }
+    // }
+    // main(123456789);   // 123,456,789
+    // console.log(arr.reverse().join(','));
+
+
+    /*
+      数组的截取
+      arr.slice(start,end)
+      start : 必需。规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。也就是说，-1 指最后一个元素，-2 指倒数第二个元素，以此类推。
+      end : 可选。规定从何处结束选取。该参数是数组片断结束处的数组下标。如果没有指定该参数，那么切分的数组包含从 start 到数组结束的所有元素。如果这个参数是负数，那么它规定的是从数组尾部开始算起的元素
+      不会改变原数组,会返回一个新的数组,包含从 start 到 end （不包括end）的元素。
+
+      数组的翻转  arr.reverse()
+
+      arr.join('分隔符')  把数组拼接成一个字符串
+    */
+
+    // 解题思路:
+    // 本题是js实现number.toLocaleString()方法，面试题做了简化不考虑负数小数，此题主要是考数据类型及字符串操作，答案不唯一。
+    // 按现实思路解题，现实中添加千位分隔符是从后到前，每3位添加逗号，所以这里输入数据转换成字符串后，利用slice方法的输入负数参数从后取的特点，从后取三位数字保存在数组中，并把取剩后的数据递归重复取值，直到数据不足3位，把剩下一起存入数组中。
+    // 这时数组中按顺序保存从后到前的分割数据。实例中数组是[‘789’, ’456’, ’123’]。通过reverse方法倒叙输出，并通过join方法添加逗号。
+
+
+    // 方法3:
+    // function toThousands(num) {
+    //   var num = (num || 0).toString(), temp = num.length % 3;
+    //   switch (temp) {
+    //     case 1:
+    //       num = '00' + num;
+    //       break;
+    //     case 2:
+    //       num = '0' + num;
+    //       break;
+    //   }
+    //   //  + 匹配前面一个表达式1次或者多次。等价于
+    //   return num.match(/\d{3}/g).join(',').replace(/^0+/, '');
+    // }
+
+    // console.log(toThousands(1234567));
+
+    /*
+      match() 方法 
+      可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配
+      该方法类似 indexOf() 和 lastIndexOf()，但是它返回指定的值，而不是字符串的位置。
+      返回一个,存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。
+
+      replace()方法 用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串
+    */
+
+    // 解题思路:
+    // 先把数字的位数补足为3的倍数，通过正则表达式，将其切割成每三个数字一个分组，再通过join方法添加逗号，最后还要把补的0移除。
+  </script>
+</body>
+
+</html>

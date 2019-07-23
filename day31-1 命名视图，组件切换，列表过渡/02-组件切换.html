@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <style>
+  /* .my-enter,
+  .my-leave-to{
+    opacity: 0;
+    transform: translateX(60px)
+  }
+  .my-enter-active,
+  .my-leave-active{
+    transition: all .6s
+  } */
+  </style>
+</head>
+<body>
+  <div id="app">
+  <button @click="toggle='login'">登录</button>
+  <button @click="toggle='regiseter'">注册</button>
+  <!-- <login></login>
+  <regiseter></regiseter>  mode="out-in"-->
+  <!-- 
+    vue 提供的过渡模式
+    in-out：新元素先进行过渡，完成之后当前元素过渡离开。
+    out-in：当前元素先进行过渡，完成之后新元素过渡进入
+   -->
+  <transition name="my" >  
+    <!-- 先出在进 -->
+      <component :is="toggle"></component>
+  </transition>
+  
+  </div>
+  <script>
+    Vue.component('login',{
+      template: `
+      <h1>登录组件</h1>
+      `
+    })
+    Vue.component('regiseter',{
+      template: `
+      <h1>注册组件</h1>
+      `
+    })
+   new Vue({
+    el : '#app',
+    data : {
+     toggle: 'login'
+    },
+    methods : {
+
+    },
+  })
+  </script>
+</body>
+</html>

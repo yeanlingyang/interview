@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+从输入URL到页面加载发生了什么？
+
+1. 用户输入URL地址
+
+2. DNS解析 DNS解析的过程就是寻找哪台机器上有你需要资源的过程
+浏览器先查找本地DNS缓存列表 没有的话 再向浏览器默认的DNS服务器发送查询请求 同时缓存
+当你在浏览器中输入一个地址时，例如www.baidu.com，其实不是百度网站真正意义上的地址。
+互联网上每一台计算机的唯一标识是它的IP地址，但是IP地址并不方便记忆。115.239.210.27 百度IP地址
+用户更喜欢用方便记忆的网址去寻找互联网上的其它计算机，也就是上面提到的百度的网址。
+所以互联网设计者需要在用户的方便性与可用性方面做一个权衡，这个权衡就是一个网址到IP地址的转换，
+这个过程就是DNS解析。它实际上充当了一个翻译的角色，实现了网址到IP地址的转换
+
+3.浏览器建立一条与目标Web服务器的TCP连接（三次握手） 
+
+4.浏览器向服务器发送一条HTTP请求报文
+
+5.服务器向浏览器返回一条HTTP响应报文
+
+6.浏览器解析渲染页面
+
+7.连接结束
+
+  
+</body>
+</html>

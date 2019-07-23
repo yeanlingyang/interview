@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+  
+  function Animal (color, age, hasWhat) {
+      this.hasColor = color
+      this.age = age
+      this.hasWhat = hasWhat
+    }
+
+    Animal.prototype.run = function () {
+      console.log(this)
+      console.log('我是动物, 我会跑')
+    }
+
+    // call的作用
+    // 调用函数并且指定函数中this指向----指向第一个参数
+    function Dog (color, age, hasWhat, kind, likeThings) {
+      Animal.call(this, color, age, hasWhat)
+      // 这里没有用new关键词，意味着只是当一个函数一样执行，与此同时还改变了父类构造函数中this的指向
+      // 在这个函数中Animal.call(this, color, age, hasWhat) 最终执行结果等同于
+      // this.hasColor = color
+      // this.age = age
+      // this.hasWhat = hasWhat
+      this.kind = kind  
+      this.likeThings = likeThings
+    }
+
+
+    const erHa = new Dog('yes', 17, ['eys', 'ear'],'哈士奇', ['骨头', '狗粮'])
+    const jinMao = new Dog('yes', 17, ['eys', 'ear'],'金毛', ['肉', '狗粮'])
+    
+    erHa.hasWhat.push('thirdEye')
+
+    console.log(erHa);
+    console.log(jinMao);
+    erHa.run()
+
+    // 缺点 父类中原型链上的东西无法被子类继承
+  </script>
+  
+</body>
+</html>

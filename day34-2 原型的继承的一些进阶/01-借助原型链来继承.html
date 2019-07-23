@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // 父类构造函数
+    function Animal (color, age, hasWhat) {
+      this.hasColor = color
+      this.age = age
+      this.hasWhat = hasWhat
+    }
+    // 父类原型方法
+    Animal.prototype.run = function () {
+      console.log(this)
+      console.log('我是动物, 我会跑')
+    }
+    // 方法中不能使用箭头函数
+    // Animal.prototype.run = () => {
+    //   console.log(this)
+    //   // console.log(this.color)
+    // }
+
+    function Dog (kind, likeThings) {
+      this.kind = kind
+      this.likeThings = likeThings
+    }
+
+    // new 的作用
+    // 1 创建一个新对象 指定对象类型
+    // 2 将this指向创建的对象
+    // 3 执行构造函数
+    // 4 返回这个对象
+    Dog.prototype = new Animal('yes', '4', ['eye', 'ear', 'nose'])
+
+    const erHa = new Dog('哈士奇', ['骨头', '狗粮'])
+    const jinMao = new Dog('金毛', ['肉', '狗粮'])
+
+    erHa.run()
+    jinMao.run()
+
+    jinMao.hasWhat.push('thirdEye')
+    console.log(jinMao.hasWhat)
+    console.log(erHa.hasWhat);
+
+    // 缺点：修改的是原型上的属性,所有的Dog实例都通过原型链访问到同一个原型对象, 任何实例修改从父类中继承下来的任何引用类型,其他实例都会被影响
+
+  </script>
+
+</body>
+</html>

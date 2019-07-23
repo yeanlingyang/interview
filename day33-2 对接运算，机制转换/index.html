@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+        
+  <!-- 
+      为什么0.1 + 0.2 != 0.3 ?
+
+      0.1 + 0.2 != 0.3 是因为在进制转换和进阶运算的过程中出现精度损失
+      计算机无法直接对十进制的数字进行运算 需要先转换成二进制,然后对阶运算
+     
+    1. 进制转换
+        
+     0.1和0.2 转换成二进制后会无限循环
+     0.1 -> 0.0001100110011001.....(无限循环)
+     0.2 -> 0.0011001100110011.....(无限循环)
+     由于有一定的位数的限制,需要将后面多余的位截掉, 这样在进制之间的转换中精度已经损失
+
+    2. 对阶运算
+      由于指数位数不相同, 运算时需要对阶运算,这部分也可能产生精度损失
+    -->
+  <script>
+
+      console.log(0.1 + 0.2)
+  
+  
+    </script>
+  
+  
+    <!-- 
+  
+        promise 有几种状态, promise有什么优缺点?
+        
+        ES6  promise(解决回调函数嵌套问题)
+        
+        promise有三种状态: fulfilled(完成) , rejected(失败), pending(进行中)
+  
+  
+        promise的优点: 
+         1. 一旦状态改变就不会再变，任何时候都可以得到这个结果。promise对象的状态改变只有两种可能：
+         从pending(进行中)到fulfilled(完成)和pending(进行中)到rejected(失败).只要其中之一发生
+         状态就凝固了,不会再变,会一直保持这个结果。就算改变已经发生，你再对promise对象添加回调函数,
+         也会立即得到这个结果. 
+         2.有了promise对象，就可以将异步操作以同步操作的流程表达出了，避免了层层嵌套的回调函数。此外，
+         promise对象提供统一的接口，使得控制异步操作更加容易。
+   
+       
+         promise的缺点:
+          1.无法取消Promise，一旦新建它就会立即执行，无法中途取消。
+          2.如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。
+          3.当处于pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。
+         
+  
+       -->
+  
+  
+    <!-- 
+  
+         3. promise 和 setTimeout的区别?
+             
+          promise是微任务, setTimeout是宏任务,同一个事件循环, promise.then总是先于setTimeout执行
+  
+          宏任务一般是：包括整体代码script，setTimeout，setInterval。
+          微任务：Promise
+    
+        -->
+</body>
+</html>

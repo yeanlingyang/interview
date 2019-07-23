@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    min-width: 0;
+  }
+
+  button {
+    border: 0px;
+    height: 100px;
+    width: 100px;
+    background: red;
+  }
+</style>
+
+<body>
+
+  <button id='btn'>按钮</button>
+
+
+  <script>
+    const btnClickFlag = true // 节流阀 防止你乱按
+
+    function css(element, style) { // 封装设置样式函数。
+      if (arguments.length < 2) {
+        return;
+      }
+      var div = Array.prototype.shift.call(arguments);
+      if (typeof style === "object") { // 小写！
+        for (var k in style) {
+          div.style[k] = style[k];
+        }
+      } else {
+        throw console.error('style传入必须式对象');
+      }
+    };
+
+    function on(event, target1, target2, fn) { // 封装事件委托
+      target1['on' + event] = function (e) {
+        var temp = document.querySelector(target2);
+        if (e.target === temp) {
+          fn();
+        }
+      }
+    }
+
+
+    function SameStyle(obj) {  // 父类基本样式
+      obj = obj || {};
+      this.width = obj.width || 600;
+      this.height = obj.height || 300;
+      this.bgc = obj.bgc || 'orange';
+      this.bdr = obj.bdr || 20;
+      this.position = obj.position || 'center';
+    }
+
+    SameStyle.prototype.create = function (element) {  // 动态创建元素
+      return document.createElement(element);
+    };
+
+    SameStyle.prototype.rander = function () {  // 父类动态创建蒙层和基本框以及渲染
+      // 创建蒙版和里面框元素
+      var menban = this.create('div');
+      var box = this.create('div');
+
+      // 设置类名方便下面操作
+      box.className = 'inner_box';
+      menban.className = 'outer_box';
+
+      // 设置蒙版样式
+      css(menban, {
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, .1)',
+        textAlign: this.position,
+        transition: 'all 1s',
+        zIndex: 999
+      });
+      //设置框样式
+      css(box, {
+        display: 'inline-block',
+        width: this.width + 'px',
+        height: this.height + 'px',
+        backgroundColor: this.bgc,
+        borderRadius: this.bdr + 'px',
+        position: 'relative'
+      });
+
+      // 加入到body中
+      document.body.appendChild(menban);
+      menban.appendChild(box);
+
+      return this; // 链式
+    };
+
+
+    SameStyle.prototype.close = function () {  // 父类设置关闭按钮功能（每个框都有关闭，提取）
+      var outer_box = document.querySelector('.outer_box');
+
+      // 随便加了一个渐隐效果。。
+      outer_box.style.opacity = 0;
+      setTimeout(function () {
+        document.body.removeChild(outer_box);
+      }, 1010);
+    };
+
+
+    // 创建父类的子类： 确认框
+    function Confirm(obj, txt) {
+      SameStyle.call(this, obj);  // 执行一遍父类的函数，改变父类中的this指向， 指向新new出来的实例。因此子类也就有了父类的中的属性，但没有得到父类中的方法。
+      this.txt = txt;
+      this.flag;
+    }
+    function F(obj) {  // 过渡函数 
+      function f() { };
+      f.prototype = obj;
+      return new f();
+    }
+    Confirm.prototype = F(SameStyle.prototype);  // 子类通过过渡函数继承了父类原型的方法
+    Confirm.prototype.constructor = Confirm; // 添加原型的构造函数指向
+
+    // 给确认框添加文本
+    Confirm.prototype.addText = function () {
+      var outDiv = document.querySelector('.outer_box');
+      var innerDiv = document.querySelector('.inner_box');
+      var p = this.create('p');
+      innerDiv.appendChild(p);
+      p.innerText = this.txt;
+      css(p, {
+        backgroundColor: 'pink',
+        padding: '40px 80px',
+        color: 'red',
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '10px'
+      })
+      return this;
+    }
+
+    // 给确认框添加确认按钮
+    Confirm.prototype.addButton = function () {
+      var outDiv = document.querySelector('.outer_box');
+      var innerDiv = document.querySelector('.inner_box');
+
+
+      var btn_yes = this.create('button');
+      btn_yes.className = 'btn_yes';
+
+      btn_yes.innerText = '确认';
+      innerDiv.appendChild(btn_yes);
+      css(btn_yes, {
+        position: 'absolute',
+        width: '100px',
+        height: '40px',
+        backgroundColor: 'blue',
+        bottom: '10px',
+        left: '10px',
+        borderRadius: '10px'
+      })
+      return this;
+    }
+
+    // 给确认框添加取消按钮
+    Confirm.prototype.addButton2 = function () {
+      var outDiv = document.querySelector('.outer_box');
+      var innerDiv = document.querySelector('.inner_box');
+
+      var btn_no = this.create('button');
+      btn_no.className = 'btn_no';
+
+      btn_no.innerText = '取消';
+      innerDiv.appendChild(btn_no);
+      css(btn_no, {
+        position: 'absolute',
+        width: '100px',
+        height: '40px',
+        backgroundColor: 'red',
+        bottom: '10px',
+        right: '10px',
+        borderRadius: '10px'
+      })
+      return this;
+    }
+
+
+    // 给确认框添加关闭按钮
+    Confirm.prototype.addClose = function () {
+      var outDiv = document.querySelector('.outer_box');
+      var innerDiv = document.querySelector('.inner_box');
+
+      var close = this.create('div');
+      close.className = 'close';
+      close.innerText = 'X';
+      innerDiv.appendChild(close);
+      css(close, {
+        position: 'absolute',
+        width: '40px',
+        height: '40px',
+        backgroundColor: 'yellow',
+        top: '10px',
+        right: '10px',
+        borderRadius: '4px',
+        fontSize: '30px',
+        lineHeight: '40px',
+        userSelect: 'none',
+        cursor: 'pointer'
+      })
+      return this;
+    }
+
+    // 给确认框每个按钮添加相应事件（事件委托）
+    Confirm.prototype.addEvent = function () {
+      var btn_yes = document.querySelector('.btn_yes');
+      var btn_no = document.querySelector('.btn_no');
+      var close = document.querySelector('.close');
+      var inner_box = document.querySelector('.inner_box');
+
+      var that = this;
+
+      let promise = new Promise(function (resolve, reject) {
+
+        inner_box.onclick = function (e) {
+          if (e.target === btn_yes) {
+            p.close();
+            resolve('yes');
+          }
+          if (e.target === btn_no) {
+            p.close();
+            resolve('no');
+          }
+          if (e.target === close) {
+            that.close();// 返回不出来
+          }
+
+        }
+      })
+      return promise;
+    };
+
+
+    // 最后给按钮全部渲染
+    Confirm.prototype.use = function (fn1, fn2) { // fn1 点是后的回调函数, fn2是失败后回调函数
+      return this.rander().addText().addButton().addButton2().addClose().addEvent().then(function (data) {
+        if (data === 'yes') {
+          fn1();
+        }
+        if (data === 'no') {
+          fn2()
+          console.log('取消了');
+        }
+      }).catch(function (data) {
+        console.log(data);
+      })
+    };
+
+    var p = new Confirm({
+      color: 'green'
+    }, '这是一个超级垃圾的自定义框~~');
+
+
+    // var str = p.use();
+    // console.log(str);
+    // // p.use();
+
+    var btn = document.getElementById('btn');
+
+    btn.onclick = function () {
+      if (!btnClickFlag) {
+        setTimeout(() => {
+          btnClickFlag = true
+        }, 1500)
+        return
+      }
+
+      c = p.use(() => {
+        var h1 = document.createElement('h1');
+        h1.innerText = '大哥们好~'
+        document.body.appendChild(h1);
+        css(h1, {
+          textAlign: 'center',
+          fontSize: '100px'
+        })
+        h1.scrollIntoView()    
+      }, () => {
+        var h1 = document.createElement('h1');
+        h1.innerText = 'qaq~';
+        document.body.appendChild(h1);
+        css(h1, {
+          textAlign: 'center',
+          fontSize: '100px'
+        })
+        h1.scrollIntoView();      
+      });
+      
+    };
+
+  </script>
+
+
+</body>
+
+</html>

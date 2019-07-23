@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+  // 组合方式继承
+  
+  // 父类
+  function Animal (color, age, hasWhat) {
+      this.hasColor = color
+      this.age = age
+      this.hasWhat = hasWhat
+    }
+
+    Animal.prototype.run = function () {
+      console.log(this)
+      console.log('我是动物, 我会跑')
+    }
+
+    // 子类
+    function Dog (color, age, hasWhat, kind, likeThings) {
+      Animal.call(this, color, age, hasWhat)  // 构造函数方式继承，实现了部分继承----继承父类构造函数中的属性
+      this.kind = kind  
+      this.likeThings = likeThings
+    }
+
+    Dog.prototype = new Animal()  // 组合方式继承，父类原型链上的的方法可以借助原型链查找到
+  
+    // 这两种继承方式互相不影响
+
+    const erHa = new Dog('yes', 17, ['eys', 'ear'],'哈士奇', ['骨头', '狗粮'])
+    const jinMao = new Dog('yes', 17, ['eys', 'ear'],'金毛', ['肉', '狗粮'])
+    
+    erHa.hasWhat.push('thirdEye')
+
+    console.log(erHa);
+    console.log(jinMao);
+    erHa.run()
+
+    // 组合式继承并不是最好的，因为子类原型上重复添加了很多属性，这是没有用的
+    // 与此同时，父类构造函数还被执行了两次，性能不是最优
+  </script>
+  
+</body>
+</html>

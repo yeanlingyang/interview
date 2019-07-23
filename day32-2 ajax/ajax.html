@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    //使用XMLHttpRequest发送get请求的步骤
+    //1. 创建一个XMLHttpRequest对象
+    var xhr = new XMLHttpRequest;//构造函数没有参数的情况,括号可以省略
+    //2. 设置请求行
+    //第一个参数:请求方式  get/post
+    //第二个参数:请求的地址 需要在url后面拼上参数列表
+    xhr.open("get", "地址?name=xxx&id=1");
+    //3. 设置请求头
+    //浏览器会给我们默认添加基本的请求头,get请求时无需设置
+    //4. 设置请求体
+    //get请求的请求体为空,因为参数列表拼接到url后面了
+    xhr.send(null);
+
+
+
+    var xhr = new XMLHttpRequest;
+    //1. 设置请求行 post请求的参数列表在请求体中
+    xhr.open("post", "地址");
+    //2. 设置请求头, post请求必须设置content-type,不然后端无法获取到数据
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    //3. 设置请求体
+    xhr.send("name=xxx&id=1");
+
+
+
+    //给xhr注册一个onreadystatechange事件，当xhr的状态发生状态发生改变时，会触发这个事件。
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // //1. 获取状态行
+        // console.log("状态行:" + xhr.status);
+        // //2. 获取响应头
+        // console.log("所有的相应头:" + xhr.getAllResponseHeaders());
+        // console.log("指定相应头:" + xhr.getResponseHeader("content-type"));
+        // //3. 获取响应体
+        // console.log(xhr.responseText);
+        // 代码。。。。。。
+      }
+    }
+
+
+
+
+
+
+
+    $.ajax({
+      type: "get",//请求类型
+      url: "地址",//请求地址
+      data: { name: "zs", age: 18 },//请求数据
+      dataType: "json",//希望接受的数据类型
+      timeout: 5000,//设置超时时间
+      beforeSend: function () {
+        //alert("发送前调用");
+      },
+      success: function (data) {
+        //alert("成功时调用");
+        console.log(data);
+      },
+      error: function (error) {
+        //alert("失败时调用");
+        console.log(error);
+      },
+      complete: function () {
+        //alert("请求完成时调用");
+      }
+    });
+
+
+
+
+    
+  </script>
+</body>
+
+</html>
